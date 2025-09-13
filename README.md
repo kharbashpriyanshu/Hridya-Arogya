@@ -6,4 +6,4 @@ Run locally:
 3. python app.py
 4. Open http://127.0.0.1:5000
 
-It is also deployed on render :https://hridya-arogya.onrender.com
+deployed on render :https://hridya-arogya.onrender.com
