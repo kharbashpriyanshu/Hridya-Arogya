@@ -1,0 +1,574 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Health Risk Assessment</title>
+  <link rel="icon" type="image/x-icon" href="/static/favicon.ico">
+  <link rel="stylesheet" href="/static/style.css" />
+  <style>
+    :root {
+      --background: #FFEEEE;
+      --primary: #E63946;
+      --charcoal: #1F2937;
+      --gray: #6B7280;
+      --success: #22C55E;
+      --warning: #F59E0B;
+      --info: #2563EB;
+    }
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    body {
+      font-family: Arial, sans-serif;
+      color: var(--charcoal);
+      padding: 0 20px 40px;
+      background: url('/static/background.jpg') no-repeat center center fixed;
+      background-size: cover;
+      background-attachment: fixed;
+    }
+    header {
+      width: 100%;
+      background: var(--primary);
+      padding: 15px 50px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-top: 20px;
+    }
+    header .logo img { width: 70px; height: auto; }
+    header nav ul {
+      list-style: none;
+      display: flex;
+      gap: 20px;
+      align-items: center;
+    }
+    header nav ul li a {
+      text-decoration: none;
+      color: var(--background);
+      font-size: 1rem;
+      transition: color 0.3s;
+    }
+    header nav ul li a:hover { color: var(--charcoal); }
+    .menu-toggle {
+      display: none;
+      font-size: 28px;
+      color: #fff;
+      cursor: pointer;
+    }
+    @media screen and (max-width: 768px) {
+      header nav ul {
+        position: absolute;
+        top: 65px;
+        left: 0;
+        right: 0;
+        background: var(--primary);
+        flex-direction: column;
+        gap: 0;
+        display: none;
+      }
+      header nav ul li { padding: 15px 0; text-align: center; }
+      header nav ul.show { display: flex; }
+      .menu-toggle { display: block; }
+    }
+    .form-container {
+      background: #fff;
+      max-width: 900px;
+      margin: 40px auto 0;
+      padding: 40px 30px;
+      border-radius: 10px;
+      box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+    }
+    .form-container h2 {
+      text-align: center;
+      margin-bottom: 30px;
+      font-size: 2rem;
+      color: var(--primary);
+    }
+    form {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+      gap: 20px;
+    }
+    .form-group {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+    }
+    .form-group label {
+      margin-bottom: 8px;
+      font-weight: bold;
+      color: var(--charcoal);
+    }
+    .form-group input,
+    .form-group select {
+      padding: 12px;
+      border: 1px solid #ccc;
+      border-radius: 6px;
+      font-size: 1rem;
+      background: #f9f9f9;
+      transition: border-color 0.3s;
+      max-width: 300px;
+      width: 100%;
+    }
+    .form-group input:focus,
+    .form-group select:focus {
+      outline: none;
+      border-color: var(--primary);
+    }
+    .input-method {
+      grid-column: 1 / -1;
+      text-align: center;
+      margin-bottom: 20px;
+    }
+    .input-method label {
+      margin: 0 15px;
+      font-size: 1.1rem;
+      cursor: pointer;
+    }
+    .input-method input[type="radio"] { margin-right: 5px; }
+    #manualInput, #uploadInput { display: none; }
+    #manualInput.active, #uploadInput.active { display: grid !important; }
+    #manualInput {
+      grid-template-columns: repeat(2, 1fr);
+      gap: 20px;
+    }
+    @media screen and (max-width: 600px) {
+      #manualInput {
+        grid-template-columns: 1fr;
+      }
+    }
+    .cta-btn {
+      grid-column: 1 / -1;
+      justify-self: center;
+      margin-top: 20px;
+      background: var(--primary);
+      color: #fff;
+      border: none;
+      padding: 14px 35px;
+      border-radius: 6px;
+      cursor: pointer;
+      font-size: 1.1rem;
+    }
+    .cta-btn:hover { background: #b82736; }
+    .prediction-result {
+      grid-column: 1 / -1;
+      text-align: center;
+      margin-top: 20px;
+      padding: 15px;
+      border-radius: 6px;
+      font-size: 1.1rem;
+      font-weight: bold;
+      display: none;
+    }
+    .prediction-result.success { background: var(--success); color: #fff; }
+    .prediction-result.error { background: var(--warning); color: #fff; }
+    .instructions {
+      grid-column: 1 / -1;
+      text-align: center;
+      margin-top: 20px;
+      color: var(--gray);
+    }
+    .error-message {
+      grid-column: 1 / -1;
+      text-align: center;
+      color: var(--warning);
+      margin-top: 10px;
+      display: none;
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <div class="logo">
+      <img src="/static/logo.jpg" alt="My Logo">
+    </div>
+    <nav>
+      <ul class="nav-links">
+        <li><a href="/">Home</a></li>
+        <li><a href="/calculator">Detector</a></li>
+        <li><a href="/doctor">Connect with Doctor</a></li>
+        <li><a href="/aboutus">About Us</a></li>
+        <li><a href="/contact">Contact Us</a></li>
+      </ul>
+      <div class="menu-toggle" id="menuToggle">&#9776;</div>
+    </nav>
+  </header>
+
+  <div class = "main-wrapper">
+  <div class="form-container">
+    <h2>Heart Health Detector</h2>
+    <form id="healthForm" action="/predict" method="POST" enctype="multipart/form-data">
+      <div class="input-method">
+        <label>
+          <input type="radio" name="inputMethod" value="manual" checked> Manual Input
+        </label>
+        <label>
+          <input type="radio" name="inputMethod" value="upload"> Upload Report
+        </label>
+      </div>
+      <div id="toggleError" class="error-message">Error: Unable to toggle input method. Please check browser console for details.</div>
+
+      <div id="manualInput" class="input-section active">
+        <div class="form-group">
+          <label for="age">Age</label>
+          <input type="number" id="age" name="age" placeholder="Enter age" required>
+        </div>
+        <div class="form-group">
+          <label for="sex">Sex</label>
+          <select id="sex" name="sex" required>
+            <option value="">Select</option>
+            <option value="1">Male</option>
+            <option value="0">Female</option>
+            <option value="2">Others</option>
+          </select>
+        </div>
+        <div class="form-group">
+          <label for="cp">Chest Pain Type</label>
+          <select id="cp" name="cp" required>
+            <option value="">Select</option>
+            <option value="0">Typical Angina</option>
+            <option value="1">Atypical Angina</option>
+            <option value="2">Non-anginal Pain</option>
+            <option value="3">Asymptomatic</option>
+          </select>
+        </div>
+        <div class="form-group">
+          <label for="trestbps">Resting BP (mm Hg)</label>
+          <input type="number" id="trestbps" name="trestbps" placeholder="Enter BP" required>
+        </div>
+        <div class="form-group">
+          <label for="chol">Cholesterol (mg/dl)</label>
+          <input type="number" id="chol" name="chol" placeholder="Enter cholesterol" required>
+        </div>
+        <div class="form-group">
+          <label for="fbs">Fasting Blood Sugar > 120 mg/dl?</label>
+          <select id="fbs" name="fbs" required>
+            <option value="">Select</option>
+            <option value="1">Yes</option>
+            <option value="0">No</option>
+          </select>
+        </div>
+        <div class="form-group">
+          <label for="restecg">Resting ECG Result</label>
+          <select id="restecg" name="restecg" required>
+            <option value="">Select</option>
+            <option value="0">Normal</option>
+            <option value="1">ST-T abnormality</option>
+            <option value="2">Left Ventricular Hypertrophy</option>
+          </select>
+        </div>
+        <div class="form-group">
+          <label for="thalach">Max Heart Rate</label>
+          <input type="number" id="thalach" name="thalach" placeholder="Enter max heart rate" required>
+        </div>
+        <div class="form-group">
+          <label for="exang">Chest Pain During Exercise?</label>
+          <select id="exang" name="exang" required>
+            <option value="">Select</option>
+            <option value="1">Yes</option>
+            <option value="0">No</option>
+          </select>
+        </div>
+        <div class="form-group">
+          <label for="oldpeak">Oldpeak</label>
+          <input type="number" step="0.1" id="oldpeak" name="oldpeak" placeholder="e.g. 1.5" required>
+        </div>
+        <div class="form-group">
+          <label for="slope">Slope</label>
+          <select id="slope" name="slope" required>
+            <option value="">Select</option>
+            <option value="0">Upsloping</option>
+            <option value="1">Flat</option>
+            <option value="2">Downsloping</option>
+          </select>
+        </div>
+        <div class="form-group">
+          <label for="ca">Visible Heart Vessels</label>
+          <input type="number" id="ca" name="ca" min="0" max="3" placeholder="0-3" required>
+        </div>
+        <div class="form-group">
+          <label for="thal">Thal</label>
+          <select id="thal" name="thal" required>
+            <option value="">Select</option>
+            <option value="1">Normal</option>
+            <option value="2">Fixed Defect</option>
+            <option value="3">Reversible Defect</option>
+          </select>
+        </div>
+      </div>
+
+      <div id="uploadInput" class="input-section">
+        <div class="form-group">
+          <label for="report">Upload Medical Report (PDF or Text)</label>
+          <input type="file" id="report" name="report" accept=".pdf,.txt">
+        </div>
+        <div class="instructions">
+          <p>Upload a medical report containing: Age, Sex, Chest Pain Type, Resting BP, Cholesterol, Fasting Blood Sugar, Resting ECG, Max Heart Rate, Exercise Angina, Oldpeak, Slope, Visible Heart Vessels, Thal.</p>
+        </div>
+      </div>
+
+      <button type="submit" class="cta-btn">Detect</button>
+      <div id="predictionResult" class="prediction-result"></div>
+    </form>
+  </div>
+  </div>
+
+  <script type="module">
+    // Optional Firebase integration (remove if not needed)
+    import { initializeApp, getApps } from "https://www.gstatic.com/firebasejs/10.12.0/firebase-app.js";
+    import { getAuth } from "https://www.gstatic.com/firebasejs/10.12.0/firebase-auth.js";
+    import { getFirestore, collection, addDoc, serverTimestamp } from "https://www.gstatic.com/firebasejs/10.12.0/firebase-firestore.js";
+
+    const firebaseConfig = {
+      apiKey: "AIzaSyB2Y03pC09bxB8w6TzSxR45bkA4k_SgYxs",
+      authDomain: "hridya-hackathon-51785.firebaseapp.com",
+      projectId: "hridya-hackathon-51785",
+      storageBucket: "hridya-hackathon-51785.firebasestorage.app",
+      messagingSenderId: "38950160855",
+      appId: "1:38950160855:web:7756799d68c61cef0e6392"
+    };
+
+    let auth, db;
+    try {
+      const app = getApps().length ? getApps()[0] : initializeApp(firebaseConfig);
+      auth = getAuth(app);
+      db = getFirestore(app);
+      console.log("Firebase initialized");
+    } catch (err) {
+      console.error("Firebase initialization error:", err);
+      document.getElementById('toggleError').style.display = 'block';
+    }
+
+    function mapReadable(form) {
+      const sexMap = { "0": "Female", "1": "Male", "2": "Others" };
+      const cpMap = { "0":"Typical Angina", "1":"Atypical Angina", "2":"Non-anginal Pain", "3":"Asymptomatic" };
+      const fbsMap = { "0":"No", "1":"Yes" };
+      const restecgMap = { "0":"Normal", "1":"ST-T abnormality", "2":"Left Ventricular Hypertrophy" };
+      const exangMap = { "0":"No", "1":"Yes" };
+      const slopeMap = { "0":"Upsloping", "1":"Flat", "2":"Downsloping" };
+      const thalMap = { "1":"Normal", "2":"Fixed Defect", "3":"Reversible Defect" };
+
+      return {
+        "Age": form.age ?? null,
+        "Sex": sexMap[form.sex] ?? form.sex,
+        "Chest Pain Type": cpMap[form.cp] ?? form.cp,
+        "Resting BP (mm Hg)": form.trestbps ?? null,
+        "Cholesterol (mg/dl)": form.chol ?? null,
+        "Fasting Blood Sugar > 120 mg/dl": fbsMap[form.fbs] ?? form.fbs,
+        "Resting ECG Result": restecgMap[form.restecg] ?? form.restecg,
+        "Max Heart Rate": form.thalach ?? null,
+        "Chest Pain During Exercise?": exangMap[form.exang] ?? form.exang,
+        "Drop in Heart Reading After Exercise (Oldpeak)": form.oldpeak ?? null,
+        "Heart Response Pattern After Exercise": slopeMap[form.slope] ?? form.slope,
+        "Visible Heart Vessels in Scan": form.ca ?? null,
+        "Heart Blood Flow Result (Thal)": thalMap[form.thal] ?? form.thal,
+        "submittedAt": serverTimestamp()
+      };
+    }
+
+    function toggleInputMethod() {
+      try {
+        console.log('Initializing toggle logic at', new Date().toISOString());
+        const form = document.getElementById('healthForm');
+        const manualInput = document.getElementById('manualInput');
+        const uploadInput = document.getElementById('uploadInput');
+        const inputMethods = document.getElementsByName('inputMethod');
+        const toggleError = document.getElementById('toggleError');
+
+        if (!form || !manualInput || !uploadInput || !inputMethods.length || !toggleError) {
+          console.error('Form elements missing:', {
+            form: !!form,
+            manualInput: !!manualInput,
+            uploadInput: !!uploadInput,
+            inputMethods: inputMethods.length,
+            toggleError: !!toggleError
+          });
+          toggleError.style.display = 'block';
+          return;
+        }
+
+        console.log('Form elements found:', inputMethods.length, 'radio buttons');
+        inputMethods.forEach(radio => {
+          radio.addEventListener('change', () => {
+            console.log(`Input method changed to: ${radio.value}`);
+            manualInput.classList.toggle('active', radio.value === 'manual');
+            uploadInput.classList.toggle('active', radio.value === 'upload');
+            manualInput.querySelectorAll('input, select').forEach(input => {
+              input.required = radio.value === 'manual';
+              console.log(`Set required=${radio.value === 'manual'} for ${input.id}`);
+            });
+            const reportInput = uploadInput.querySelector('#report');
+            if (reportInput) {
+              reportInput.required = radio.value === 'upload';
+              console.log(`Set required=${radio.value === 'upload'} for report input`);
+            }
+            toggleError.style.display = 'none';
+            console.log('Current classes:', {
+              manualInput: manualInput.className,
+              uploadInput: uploadInput.className
+            });
+          });
+        });
+
+        // Trigger initial state
+        const checkedRadio = document.querySelector('input[name="inputMethod"]:checked');
+        if (checkedRadio) {
+          checkedRadio.dispatchEvent(new Event('change'));
+          console.log('Initial toggle triggered for:', checkedRadio.value);
+        } else {
+          console.warn('No radio button checked initially');
+        }
+      } catch (err) {
+        console.error('Toggle initialization error:', err);
+        document.getElementById('toggleError').style.display = 'block';
+      }
+    }
+
+    document.addEventListener('DOMContentLoaded', () => {
+      console.log('DOM fully loaded at', new Date().toISOString());
+      toggleInputMethod();
+      setTimeout(toggleInputMethod, 1000); // Retry for safety
+
+      const menuToggle = document.getElementById('menuToggle');
+      const navLinks = document.querySelector('header nav ul');
+      if (menuToggle && navLinks) {
+        console.log('Menu toggle and nav links found');
+        menuToggle.addEventListener('click', () => {
+          console.log('Menu toggle clicked');
+          navLinks.classList.toggle('show');
+        });
+      } else {
+        console.error('Menu toggle or nav links not found');
+      }
+
+      const form = document.getElementById('healthForm');
+      let isSubmitting = false;
+      if (form) {
+        form.addEventListener('submit', async (e) => {
+          e.preventDefault();
+          if (isSubmitting) {
+            console.log('Submission prevented: already submitting');
+            return;
+          }
+          isSubmitting = true;
+
+          const predictionResult = document.getElementById('predictionResult');
+          predictionResult.style.display = 'none';
+          predictionResult.textContent = '';
+          predictionResult.className = 'prediction-result';
+
+          try {
+            const inputMethod = document.querySelector('input[name="inputMethod"]:checked')?.value;
+            if (!inputMethod) {
+              predictionResult.textContent = 'Error: Please select an input method.';
+              predictionResult.className = 'prediction-result error';
+              predictionResult.style.display = 'block';
+              isSubmitting = false;
+              return;
+            }
+            console.log(`Submitting with input method: ${inputMethod}`);
+
+            const formData = new FormData(form);
+            formData.append('inputMethod', inputMethod);
+
+            // Optional Firebase storage (remove if not needed)
+            if (inputMethod === 'manual' && auth && db) {
+              const user = auth.currentUser;
+              if (!user) {
+                predictionResult.textContent = '⚠️ Please login first!';
+                predictionResult.className = 'prediction-result error';
+                predictionResult.style.display = 'block';
+                isSubmitting = false;
+                return;
+              }
+
+              const raw = {
+                age: document.getElementById("age")?.value,
+                sex: document.getElementById("sex")?.value,
+                cp: document.getElementById("cp")?.value,
+                trestbps: document.getElementById("trestbps")?.value,
+                chol: document.getElementById("chol")?.value,
+                fbs: document.getElementById("fbs")?.value,
+                restecg: document.getElementById("restecg")?.value,
+                thalach: document.getElementById("thalach")?.value,
+                exang: document.getElementById("exang")?.value,
+                oldpeak: document.getElementById("oldpeak")?.value,
+                slope: document.getElementById("slope")?.value,
+                ca: document.getElementById("ca")?.value,
+                thal: document.getElementById("thal")?.value
+              };
+
+              try {
+                const userEmailId = user.email.replace(/\./g, "_");
+                await addDoc(collection(db, "form_submissions", userEmailId, "submissions"), mapReadable(raw));
+                console.log("Form data saved to Firebase");
+              } catch (err) {
+                console.error("Error saving data to Firebase:", err);
+                predictionResult.textContent = 'Error: Failed to save data to Firebase.';
+                predictionResult.className = 'prediction-result error';
+                predictionResult.style.display = 'block';
+                isSubmitting = false;
+                return;
+              }
+            } else if (inputMethod === 'upload' && auth && db) {
+              const fileInput = document.getElementById('report');
+              if (!fileInput.files.length) {
+                predictionResult.textContent = 'Error: Please upload a medical report.';
+                predictionResult.className = 'prediction-result error';
+                predictionResult.style.display = 'block';
+                isSubmitting = false;
+                return;
+              }
+              try {
+                const user = auth.currentUser;
+                const userEmailId = user.email.replace(/\./g, "_");
+                await addDoc(collection(db, "form_submissions", userEmailId, "submissions"), {
+                  filename: fileInput.files[0].name,
+                  submittedAt: serverTimestamp()
+                });
+                console.log("File metadata saved to Firebase");
+              } catch (err) {
+                console.error("Error saving file metadata to Firebase:", err);
+                predictionResult.textContent = 'Error: Failed to save file metadata to Firebase.';
+                predictionResult.className = 'prediction-result error';
+                predictionResult.style.display = 'block';
+                isSubmitting = false;
+                return;
+              }
+            }
+
+            console.log('Sending form data to /predict');
+            const response = await fetch("/predict", {
+              method: "POST",
+              body: formData
+            });
+
+            const result = await response.json();
+            predictionResult.style.display = 'block';
+            if (response.ok && result.prediction_text) {
+              predictionResult.textContent = result.prediction_text;
+              predictionResult.className = 'prediction-result ' + (result.prediction_text.includes('No Heart Disease') ? 'success' : 'error');
+              console.log(`Prediction result: ${result.prediction_text}`);
+            } else {
+              predictionResult.textContent = result.prediction_text || 'Error: Unable to get prediction.';
+              predictionResult.className = 'prediction-result error';
+              console.error(`Prediction error: ${result.prediction_text || 'No prediction text'}`);
+            }
+          } catch (err) {
+            console.error("Error fetching prediction:", err);
+            predictionResult.textContent = "Error: Unable to connect to prediction server.";
+            predictionResult.className = 'prediction-result error';
+            predictionResult.style.display = 'block';
+          } finally {
+            isSubmitting = false;
+            console.log('Submission complete, isSubmitting reset to false');
+          }
+        });
+      } else {
+        console.error('Form not found');
+        document.getElementById('toggleError').style.display = 'block';
+      }
+    });
+  </script>
+</body>
+</html>

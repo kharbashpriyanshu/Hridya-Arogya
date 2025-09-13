@@ -1,0 +1,360 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+  <!-- Boxicons -->
+  <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
+  <!-- Remix icons -->
+  <link href="https://cdn.jsdelivr.net/npm/remixicon/fonts/remixicon.css" rel="stylesheet">
+
+  <style>
+     /* ===== Root Variables (theme colors) ===== */
+:root {
+  --main-color: #000000;
+  --highlight-color: #000000;
+  --bg-color: #FFEEEE;
+  --text-color: #222;
+  --background: #fcdcdc;
+  --primary: #E63946;
+  --charcoal: #1F2937;
+  --gray: #6B7280;
+  --success: #22C55E;
+  --warning: #F59E0B;
+  --info: #2563EB;
+}
+
+/* ===== Reset ===== */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body, html {
+  height: 100%;
+  font-family: Arial, sans-serif;
+  background: var(--bg-color);
+  color: var(--text-color);
+}
+
+/* ===== Cover Image Section ===== */
+.home-top {
+  height: 70vh;  
+  background: url("/static/bp.jpg") no-repeat center/cover;
+  position: relative;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  color: white;
+}
+
+.home-top::after {
+  content: "";
+  position: absolute;
+  top: 0; left: 0;
+  width: 100%; height: 100%;
+  background: rgba(34,34,59,0.5);
+}
+
+.home-top-content {
+  position: relative;
+  z-index: 2;
+  max-width: 700px;
+}
+
+.home-top-content h1 {
+  font-size: 3.5rem;
+  font-weight: 700;
+  margin-bottom: 1rem;
+}
+
+.home-top-content p {
+  font-size: 1.4rem;
+  line-height: 1.6;
+}
+
+/* ===== BP Info Section ===== */
+.bp-info {
+  background: #ffd4d4;
+  padding: 3rem 9%;
+  text-align: left;
+}
+
+.bp-info h2 {
+  font-size: 2.4rem;
+  color: var(--main-color);
+  margin-bottom: 1rem;
+}
+
+.bp-info h3 {
+  font-size: 2rem;
+  color: var(--highlight-color);
+  margin-top: 2rem;
+  margin-bottom: 0.5rem;
+}
+
+.bp-info p {
+  font-size: 1.2rem;
+  line-height: 1.6;
+  margin: 0.5rem 0 1rem;
+  color: var(--text-color);
+}
+
+.bp-info ul {
+  font-size: 1.2rem;
+  line-height: 1.6;
+  margin: 0.5rem 0 1.5rem 1.5rem;
+  padding-left: 1rem;
+}
+
+.bp-info ul li {
+  margin-bottom: 0.5rem;
+}
+
+.bp-highlight {
+  font-weight: 600;
+  color: #333;
+  margin-top: 1rem;
+}
+
+.home-top {
+  position: relative;
+  height: 70vh;
+  background: url("/static/bp.jpg") no-repeat center/cover;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  color: white;
+}
+
+.image-credit {
+  position: absolute;
+  bottom: 10px;
+  right: 15px;
+  font-size: 0.9rem;
+  color: #000000;  
+  font-style: bold;
+  font-weight: 10000;
+  pointer-events: none;
+}
+
+header {
+  width: 100%;
+  background: var(--primary);
+  padding: 15px 50px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+header .logo {
+  color: var(--background);
+  font-size: 1.5rem;
+  font-weight: bold;
+}
+
+.menu-toggle {
+  display: none;
+  font-size: 2rem;
+  background: none;
+  border: none;
+  color: var(--background);
+  cursor: pointer;
+}
+
+header nav ul {
+  list-style: none;
+  display: flex;
+  gap: 30px;
+  align-items: center;
+}
+
+header nav ul li a {
+  text-decoration: none;
+  color: var(--background);
+  font-size: 1rem;
+  transition: color 0.3s;
+}
+
+header nav ul li a:hover {
+  color: var(--charcoal);
+}
+
+@media screen and (max-width: 768px) {
+  .menu-toggle {
+    display: block;
+  }
+
+  header nav ul {
+    position: absolute;
+    top: 65px;
+    left: 0;
+    right: 0;
+    background: var(--primary);
+    flex-direction: column;
+    align-items: center;
+    gap: 0;
+    display: none;
+    z-index: 1000;
+  }
+
+  header nav ul li {
+    width: 100%;
+    padding: 15px 0;
+    text-align: center;
+    border-bottom: 1px solid rgba(255,255,255,0.2);
+    margin-left: 0 !important;
+  }
+
+  header nav ul li a {
+    width: 100%;
+    display: block;
+  }
+
+  header nav ul.show {
+    display: flex; 
+  }
+
+  .logo {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 20px; /* niche gap */
+}
+
+.logo img {
+  width: 70px;   /* apne hisaab se size adjust karo */
+  height: auto;   /* height auto rakho taaki image stretch na ho */
+}
+
+header .logo {
+  color: var(--background);
+  font-size: 1.5rem;
+  font-weight: bold;
+}
+}
+</style>
+</head>
+<body>
+<!-- Header -->
+  <header>
+  <div class="logo">
+  <img src="/static/logo.jpg" alt="My Logo">
+</div>
+
+  <button id="menuToggle" class="menu-toggle">&#9776;</button> 
+
+  <nav>
+    <ul>
+      <li><a href="index.html">Home</a></li>
+      <li><a href="calculator.html">Detector</a></li>
+      <li><a href="aboutus.html">About Us</a></li>
+      <li><a href="contact.html">Contact Us</a></li>
+    </ul>
+  </nav>
+</header>
+
+
+  <section class="home" id="home">
+    <div class="home-top">
+  <div class="home-top-content">
+    <h1>What is Blood Pressure? <br>(Why High or Low BP Matters for Your Heart)</h1>
+    <p>
+      Blood pressure is the pressure your blood exerts on the walls of your arteries.
+      It’s created by your heart pumping blood. This pressure helps carry oxygen and
+      nutrients to every part of your body.
+    </p>
+  </div>
+
+  <!-- Credit line -->
+  <div class="image-credit">Edited by-Sambhavi Chakraborty</div>
+</div>
+
+    <!-- Bottom 30% White Content -->
+    <div class="home-bottom">
+     
+     <!-- BP Info Section starts BELOW the image -->
+<section class="bp-info">
+  <div class="bp-container">
+    <h2>What is Blood Pressure (BP)?</h2>
+    <p>
+      When you turn on a tap at home, water flows because of pressure in the pipes. 
+      Your heart works in a very similar way—it pumps blood with a certain pressure 
+      through your body’s “pipes,” called blood vessels. This is what we call blood pressure (BP).
+    </p>
+
+    <h3>Every BP Reading Has Two Numbers:</h3>
+    <ul>
+      <li><strong>Systolic (upper number):</strong> the pressure when your heart squeezes blood out.</li>
+      <li><strong>Diastolic (lower number):</strong> the pressure when your heart relaxes and refills.</li>
+    </ul>
+    <p>A normal value is around <strong>120/80 mm Hg</strong>.</p>
+
+    <h3>Why High BP is Dangerous</h3>
+    <p>
+      High blood pressure (hypertension) is often called a “silent killer.” 
+      You may feel fine, but inside, your arteries and heart are under constant stress. Over time, this can:
+    </p>
+    <ul>
+      <li>Damage blood vessels</li>
+      <li>Make your heart work harder and grow weak</li>
+      <li>Lead to heart attacks, strokes, kidney problems, or even sudden death</li>
+    </ul>
+
+    <h3>Why Low BP Matters Too</h3>
+    <p>Low blood pressure (hypotension) means your organs don’t get enough blood. This can cause:</p>
+    <ul>
+      <li>Dizziness</li>
+      <li>Fainting</li>
+      <li>Weakness</li>
+    </ul>
+    <p> In severe cases, it can even be life-threatening.</p>
+
+    <h3>Keeping BP in the Safe Zone</h3>
+    <ul>
+      <li><strong>Normal:</strong> around 120/80 mm Hg</li>
+      <li><strong>High:</strong> 130/80 or above</li>
+      <li><strong>Low:</strong> below 90/60</li>
+    </ul>
+
+    <p>You can protect yourself by:</p>
+    <ul>
+      <li>Checking BP regularly</li>
+      <li>Staying active (even 5 extra minutes of walking or climbing stairs daily helps)</li>
+      <li>Eating wisely (less salt, more fruits, vegetables, and potassium-rich foods like bananas)</li>
+      <li>Sleeping well and managing stress</li>
+    </ul>
+
+    <h3>Final Thought</h3>
+    <p>
+      Think of your blood pressure like the water pipes in your house:
+    </p>
+    <ul>
+      <li>If pressure is too high, pipes may burst.</li>
+      <li>If pressure is too low, nothing flows.</li>
+    </ul>
+    <p class="bp-highlight">
+       The right pressure keeps everything running smoothly—and keeps your heart safe.
+    </p>
+  </div>
+</section>
+
+     
+
+      
+    </div>
+  </section>
+  <script>
+  const menuToggle = document.getElementById('menuToggle');
+const navLinks = document.querySelector('header nav ul');
+
+menuToggle.addEventListener('click', () => {
+  navLinks.classList.toggle('show');
+});
+</script>
+</body>
+</html>

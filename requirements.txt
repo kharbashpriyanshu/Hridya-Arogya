@@ -1,0 +1,7 @@
+Flask==2.1.1
+joblib==1.1.0
+numpy==1.21.2
+scikit-learn
+PyPDF2
+gunicorn
+firebase-admin   # only if using firebase-admin in backend

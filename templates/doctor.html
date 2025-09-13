@@ -1,0 +1,428 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Contact Doctors | Hridya Aarogya</title>
+  <link rel="stylesheet" href="style.css" />
+  <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
+
+  <style>
+    :root {
+      --primary: #b82736;
+      --charcoal: #22223B;
+      --gray: #555;
+    }
+
+    body {
+      font-family: sans-serif;
+      margin: 0;
+      padding: 0;
+      background: #f8f8f8;
+    }
+
+    header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 15px 30px;
+      background-color: var(--primary);
+      color: white;
+      flex-wrap: wrap;
+    }
+
+    header nav ul {
+      list-style: none;
+      display: flex;
+      gap: 20px;
+      margin: 0;
+      padding: 0;
+      margin-left: auto;
+    }
+
+    header nav ul li a {
+      color: white;
+      text-decoration: none;
+      font-weight: 500;
+      font-size: 1rem;
+    }
+
+    header nav ul li a:hover,
+    header nav ul li a.active {
+      text-decoration: underline;
+    }
+
+    .logo img {
+      width: 60px;
+      height: auto;
+    }
+
+    .user-auth-section {
+      display: flex;
+      align-items: center;
+      gap: 15px;
+      margin-left: 20px;
+    }
+
+    .doctors-section {
+      padding: 60px 20px;
+      max-width: 1100px;
+      margin: auto;
+    }
+
+    .doctors-section h2 {
+      text-align: center;
+      margin-bottom: 40px;
+      font-size: 2rem;
+      color: var(--primary);
+    }
+
+    .doctor-card {
+      display: flex;
+      gap: 20px;
+      background: #fff;
+      border-radius: 14px;
+      box-shadow: 0 6px 18px rgba(0, 0, 0, 0.08);
+      padding: 20px;
+      margin-bottom: 30px;
+      align-items: flex-start;
+      flex-wrap: wrap;
+    }
+
+    .doctor-card .emoji {
+      font-size: 5rem;
+      margin-top: 10px;
+    }
+
+    .doctor-info {
+      flex: 1;
+    }
+
+    .doctor-info h3 {
+      margin: 0;
+      font-size: 1.5rem;
+      color: var(--charcoal);
+    }
+
+    .doctor-info p {
+      margin: 6px 0;
+      color: var(--gray);
+      font-size: 0.95rem;
+      line-height: 1.5;
+    }
+
+    .doctor-info .designation {
+      font-weight: bold;
+      color: var(--primary);
+      margin-top: 10px;
+    }
+
+    .doctor-info button {
+      background: var(--primary);
+      color: white;
+      padding: 10px 16px;
+      border: none;
+      border-radius: 8px;
+      cursor: pointer;
+      margin-top: 10px;
+    }
+
+    .doctor-info button:hover {
+      background: #961d29;
+    }
+
+    @media (max-width: 768px) {
+      .doctor-card {
+        flex-direction: column;
+        align-items: center;
+        text-align: center;
+      }
+    }
+
+    /* Appointment Modal */
+    .modal {
+      display: none;
+      position: fixed;
+      z-index: 9999;
+      left: 0; top: 0;
+      width: 100%; height: 100%;
+      background-color: rgba(0, 0, 0, 0.6);
+      justify-content: center;
+      align-items: center;
+    }
+
+    .modal-content {
+      background: #fff;
+      padding: 30px;
+      border-radius: 12px;
+      max-width: 400px;
+      width: 90%;
+      box-shadow: 0 6px 20px rgba(0,0,0,0.3);
+    }
+
+    .modal-content h3 {
+      margin-top: 0;
+      color: var(--primary);
+    }
+
+    .modal-content input, .modal-content textarea {
+      width: 100%;
+      padding: 10px;
+      margin-top: 10px;
+      margin-bottom: 15px;
+      border: 1px solid #ccc;
+      border-radius: 8px;
+      font-size: 1rem;
+    }
+
+    .modal-content button {
+      width: 100%;
+      background: var(--primary);
+      color: white;
+      padding: 10px;
+      border: none;
+      border-radius: 8px;
+      font-size: 1rem;
+      cursor: pointer;
+    }
+
+    .modal-content button:hover {
+      background: #961d29;
+    }
+
+    .close-modal {
+      position: absolute;
+      top: 20px; right: 20px;
+      font-size: 24px;
+      cursor: pointer;
+      color: white;
+    }
+
+    /* Footer */
+    footer {
+      background: var(--charcoal);
+      color: white;
+      padding: 40px 20px;
+    }
+
+    .footer-container {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: space-between;
+      max-width: 1100px;
+      margin: auto;
+    }
+
+    .footer-brand, .footer-links, .footer-contact {
+      flex: 1;
+      margin: 10px 20px;
+    }
+
+    .footer-bottom {
+      text-align: center;
+      padding-top: 20px;
+      border-top: 1px solid #444;
+      font-size: 0.9rem;
+    }
+
+    .social-icons a {
+      color: white;
+      margin-right: 10px;
+      font-size: 1.5rem;
+    }
+  </style>
+</head>
+
+<body>
+
+  <!-- Header Start -->
+  <header>
+    <div class="logo">
+      <img src="/static/logo.jpg" alt="Logo" />
+    </div>
+<nav>
+  <ul>
+    <li><a href="/">Home</a></li>
+    <li><a href="/calculator">Detector</a></li>
+    <li><a href="/aboutus">About Us</a></li>
+    <li><a href="/contact">Contact Us</a></li>
+  </ul>
+</nav>
+
+    <div class="user-auth-section">
+      <button class="login-btn">Login</button>
+    </div>
+  </header>
+  <!-- Header End -->
+
+  <!-- Doctors Section -->
+  <section class="doctors-section">
+    <h2>Connect with Our Doctors</h2>
+
+    <!-- Doctor Cards -->
+    <div class="doctor-card">
+      <div class="emoji">👩‍⚕</div>
+      <div class="doctor-info">
+        <h3>Dr. 1</h3>
+        <p class="designation">asdfg</p>
+        <p><strong>Education:</strong> aduhcabdi</p>
+        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. 20+ years experience in cardiac care.</p>
+        <button onclick="openModal('Dr. 1')">Book Appointment</button>
+      </div>
+    </div>
+
+    <div class="doctor-card">
+      <div class="emoji">👨‍⚕</div>
+      <div class="doctor-info">
+        <h3>Dr. 2</h3>
+        <p class="designation">sdcnksdjn</p>
+        <p><strong>Education:</strong>KHSBCXASIJ</p>
+        <p>Lorem ipsum dolor sit amet consectetur, adipisicing elit. Facere recusandae voluptatum doloribus assumenda dicta</p>
+        <button onclick="openModal('Dr. 2')">Book Appointment</button>
+      </div>
+    </div>
+
+    <div class="doctor-card">
+      <div class="emoji">👩‍⚕</div>
+      <div class="doctor-info">
+        <h3>Dr. 3</h3>
+        <p class="designation">kajbdckhjd</p>
+        <p><strong>Education:</strong> jsdabhfj</p>
+        <p>Lorem, ipsum dolor sit amet consectetur adipisi, ab iusto dolor.</p>
+        <button onclick="openModal('Dr. 3')">Book Appointment</button>
+      </div>
+    </div>
+  </section>
+
+  <!-- Modal -->
+  <div class="modal" id="appointmentModal">
+    <div class="modal-content">
+      <span class="close-modal" onclick="closeModal()">&times;</span>
+      <h3 id="modalDoctorName">Book Appointment</h3>
+      <input type="text" placeholder="Your Name" id="appointName" required>
+      <input type="tel" placeholder="Phone Number" id="appointPhone" required>
+      <textarea rows="4" placeholder="Describe your issue..." id="appointDesc" required></textarea>
+      <button onclick="submitAppointment()">Submit</button>
+    </div>
+  </div>
+
+  <!-- Footer -->
+  <footer>
+    <div class="footer-container">
+      <div class="footer-brand">
+        <h3>Hridya Aarogya</h3>
+        <p>Your companion in heart health. Stay informed. Stay protected.</p>
+      </div>
+
+      <div class="footer-links">
+        <h4>Quick Links</h4>
+        <ul>
+          <li><a href="index.html">Home</a></li>
+          <li><a href="contact-doctor.html">Doctors</a></li>
+          <li><a href="#calculator">Health Check</a></li>
+          <li><a href="#articles">Articles</a></li>
+        </ul>
+      </div>
+
+      <div class="footer-contact">
+        <h4>Contact Us</h4>
+        <p>Email: care@hridyaaarogya.com</p>
+        <p>Phone: +91 98765 43210</p>
+        <div class="social-icons">
+          <a href="#"><i class='bx bxl-facebook'></i></a>
+          <a href="#"><i class='bx bxl-instagram'></i></a>
+          <a href="#"><i class='bx bxl-twitter'></i></a>
+        </div>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <p>&copy; 2025 Hridya Aarogya. All rights reserved.</p>
+    </div>
+  </footer>
+
+  <script>
+    function openModal(doctorName) {
+      document.getElementById("appointmentModal").style.display = "flex";
+      document.getElementById("modalDoctorName").innerText = "Book Appointment with " + doctorName;
+    }
+
+    function closeModal() {
+      document.getElementById("appointmentModal").style.display = "none";
+    }
+
+    function submitAppointment() {
+      const name = document.getElementById("appointName").value;
+      const phone = document.getElementById("appointPhone").value;
+      const desc = document.getElementById("appointDesc").value;
+
+      if (!name || !phone || !desc) {
+        alert("Please fill all fields.");
+        return;
+      }
+
+      alert("Appointment request sent!\nName: " + name + "\nPhone: " + phone + "\nIssue: " + desc);
+      closeModal();
+    }
+  </script>
+
+  <script type="module">
+  import { initializeApp, getApps } from "https://www.gstatic.com/firebasejs/10.12.0/firebase-app.js";
+  import { getAuth } from "https://www.gstatic.com/firebasejs/10.12.0/firebase-auth.js";
+  import { getFirestore, collection, addDoc, serverTimestamp } from "https://www.gstatic.com/firebasejs/10.12.0/firebase-firestore.js";
+
+  // Firebase config (same as before)
+  const firebaseConfig = {
+    apiKey: "AIzaSyB2Y03pC09bxB8w6TzSxR45bkA4k_SgYxs",
+    authDomain: "hridya-hackathon-51785.firebaseapp.com",
+    projectId: "hridya-hackathon-51785",
+    storageBucket: "hridya-hackathon-51785.firebasestorage.app",
+    messagingSenderId: "38950160855",
+    appId: "1:38950160855:web:7756799d68c61cef0e6392"
+  };
+
+  // Initialize
+  const app = getApps().length ? getApps()[0] : initializeApp(firebaseConfig);
+  const auth = getAuth(app);
+  const db = getFirestore(app);
+
+  // ✅ Modified submitAppointment to save in Firestore
+  window.submitAppointment = async function () {
+    const name = document.getElementById("appointName").value.trim();
+    const phone = document.getElementById("appointPhone").value.trim();
+    const desc = document.getElementById("appointDesc").value.trim();
+    const doctorName = document.getElementById("modalDoctorName").innerText.replace("Book Appointment with ", "");
+
+    if (!name || !phone || !desc) {
+      alert("⚠️ Please fill all fields.");
+      return;
+    }
+
+    const user = auth.currentUser;
+    if (!user) {
+      alert("⚠️ Please login first to book an appointment.");
+      return;
+    }
+
+    const appointmentData = {
+      "Patient Name": name,
+      "Phone Number": phone,
+      "Issue": desc,
+      "Doctor": doctorName,
+      "User Email": user.email,
+      "Requested At": serverTimestamp()
+    };
+
+    try {
+      const userEmailId = user.email.replace(/\./g, "_");
+      await addDoc(collection(db, "doctor_appointments", userEmailId, "requests"), appointmentData);
+      alert("✅ Appointment request sent successfully!");
+      closeModal();
+    } catch (err) {
+      console.error("Error saving appointment:", err);
+      alert("❌ Error booking appointment.");
+    }
+  };
+</script>
+
+</body>
+</html>

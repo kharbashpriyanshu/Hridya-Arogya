@@ -1,0 +1,365 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+  <!-- Boxicons -->
+  <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
+  <!-- Remix icons -->
+  <link href="https://cdn.jsdelivr.net/npm/remixicon/fonts/remixicon.css" rel="stylesheet">
+
+  <style>
+     /* ===== Root Variables (theme colors) ===== */
+:root {
+  --main-color: #000000;
+  --highlight-color: #000000;
+  --bg-color: #FFEEEE;
+  --text-color: #222;
+  --background: #fcdcdc;
+  --primary: #E63946;
+  --charcoal: #1F2937;
+  --gray: #6B7280;
+  --success: #22C55E;
+  --warning: #F59E0B;
+  --info: #2563EB;
+}
+
+/* ===== Reset ===== */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body, html {
+  height: 100%;
+  font-family: Arial, sans-serif;
+  background: var(--bg-color);
+  color: var(--text-color);
+}
+
+/* ===== Cover Image Section ===== */
+.home-top {
+  height: 70vh;  /* covers 70% of viewport height */
+  background: url("/static/st.jpg") no-repeat center/cover;
+  position: relative;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  color: white;
+}
+
+.home-top::after {
+  content: "";
+  position: absolute;
+  top: 0; left: 0;
+  width: 100%; height: 100%;
+  background: rgba(34,34,59,0.5); /* overlay */
+}
+
+.home-top-content {
+  position: relative;
+  z-index: 2;
+  max-width: 700px;
+}
+
+.home-top-content h1 {
+  font-size: 3.5rem;
+  font-weight: 700;
+  margin-bottom: 1rem;
+}
+
+.home-top-content p {
+  font-size: 1.4rem;
+  line-height: 1.6;
+}
+
+
+
+/* ===== BP Info Section ===== */
+.bp-info {
+  background: #ffd4d4;
+  padding: 3rem 9%;
+  text-align: left;
+}
+
+.bp-info h2 {
+  font-size: 2.4rem;
+  color: var(--main-color);
+  margin-bottom: 1rem;
+}
+
+.bp-info h3 {
+  font-size: 2rem;
+  color: var(--highlight-color);
+  margin-top: 2rem;
+  margin-bottom: 0.5rem;
+}
+
+.bp-info p {
+  font-size: 1.2rem;
+  line-height: 1.6;
+  margin: 0.5rem 0 1rem;
+  color: var(--text-color);
+}
+
+.bp-info ul {
+  font-size: 1.2rem;
+  line-height: 1.6;
+  margin: 0.5rem 0 1.5rem 1.5rem;
+  padding-left: 1rem;
+}
+
+.bp-info ul li {
+  margin-bottom: 0.5rem;
+}
+
+.bp-highlight {
+  font-weight: 600;
+  color: #333;
+  margin-top: 1rem;
+}
+
+
+
+.image-credit {
+  position: absolute;
+  bottom: 10px;
+  right: 15px;
+  font-size: 0.9rem;
+  color: #000000;   /* pure white */
+  font-style: bold;
+  font-weight: 10000; /* optional: makes it a bit more readable */
+  pointer-events: none;
+}
+
+header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background: #E63946;
+  padding: 15px 60px;
+  box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+  border-radius: 0 0 20px 20px;
+}
+
+header .logo img {
+  height: 55px;
+  border-radius: 10px;
+}
+
+header nav ul {
+  list-style: none;
+  display: flex;
+  gap: 35px;
+  align-items: center;
+  margin: 0;
+  padding: 0;
+}
+
+header nav ul li a {
+  text-decoration: none;
+  color: white;
+  font-weight: 600;
+  transition: 0.3s;
+}
+
+header nav ul li a:hover {
+  color: #FFDCDC;
+  text-shadow: 1px 1px 5px rgba(0,0,0,0.3);
+}
+
+.login-btn {
+  padding: 8px 15px;
+  background: #F2E9E4;
+  color: #E63946;
+  font-weight: 600;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: 0.3s;
+}
+
+.login-btn:hover {
+  background: #fff;
+  color: #E63946;
+  box-shadow: 0 5px 10px rgba(0,0,0,0.2);
+  transform: translateY(-2px);
+}
+
+footer {
+  background-color: #E63946;
+  color: #F2E9E4;
+  padding: 40px 20px 10px;
+  font-family: 'Segoe UI', sans-serif;
+}
+
+.footer-container {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  max-width: 1200px;
+  margin: auto;
+  padding-bottom: 20px;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.2);
+}
+
+.footer-column {
+  flex: 1 1 250px;
+  margin: 10px;
+}
+
+.footer-column h4 {
+  font-size: 20px;
+  margin-bottom: 15px;
+  color: #F2E9E4;
+}
+
+.footer-column p,
+.footer-column li,
+.footer-column a {
+  font-size: 15px;
+  color: #C9ADA7;
+  text-decoration: none;
+  line-height: 1.7;
+}
+
+.footer-column a:hover {
+  color: #ffffff;
+  text-decoration: underline;
+}
+
+.footer-column ul {
+  list-style: none;
+  padding: 0;
+}
+
+.footer-bottom {
+  text-align: center;
+  padding: 15px 0;
+  font-size: 14px;
+  color: #C9ADA7;
+}
+
+  </style>
+
+
+
+</head>
+<body>
+
+<!-- Header -->
+<header>
+  <div class="logo">
+    <img src="/static/logo.jpg" alt="My Logo">
+  </div>
+  <nav>
+    <ul id="nav-menu">
+      <li><a href="/">Home</a></li> <!-- ✅ Changed -->
+      <li><a href="/calculator">Detector</a></li> <!-- ✅ Changed -->
+      <li><a href="#articles">Articles</a></li>
+      <li><a href="/doctor">Connect with doctors</a></li> <!-- ✅ Changed -->
+      <li><a href="/aboutus">About Us</a></li> <!-- ✅ Changed -->
+      <li><a href="/contact">Contact Us</a></li> <!-- ✅ Changed -->
+      <li><button class="login-btn" onclick="openLoginModal()">Login</button></li>
+    </ul>
+  </nav>
+</header>
+
+
+  <section class="home" id="home">
+    <!-- Top 70% Background with space for text -->
+    <div class="home-top">
+  <div class="home-top-content">
+    <h1>The Role of Stress and Sleep in Heart Health</h1>
+    <p>
+      Your heart doesn’t just respond to food and exercise, it also reacts to how stressed you feel and how well you sleep. In today’s fast-paced world, stress and poor sleep are becoming hidden enemies of heart health.
+    </p>
+  </div>
+
+  <!-- Credit line -->
+  <div class="image-credit">Edited by-Parth Mathur</div>
+</div>
+
+    <!-- Bottom 30% White Content -->
+    <div class="home-bottom">
+     
+     <!-- BP Info Section starts BELOW the image -->
+<section class="bp-info">
+  <div class="bp-container">
+    <h2>Stress and the Heart</h2>
+    <p>
+      When you’re stressed, your body releases hormones like adrenaline and cortisol. In small bursts, this is normal. But constant stress can:
+<ul>
+      <li>Keep blood pressure high</li>
+      <li>Raise cholesterol and blood sugar</li>
+      <li>Tighten blood vessels</li>
+      <li>Trigger unhealthy coping habits (smoking, overeating, alcohol)</li>
+    </ul>
+<p>Over time, this strain increases the risk of heart attacks, strokes, and irregular heartbeat.
+    </p>
+    </p>
+
+    <h3>Sleep and the Heart</h3>
+  <p>Sleep is the body’s natural repair time. Adults need 7–8 hours of good-quality sleep each night. Poor sleep can:
+    </p>
+  <ul>
+      <li>Raise blood pressure and heart rate</li>
+      <li>Increase risk of diabetes and obesity</li>
+      <li>Weaken immunity and energy levels</li>
+      <li>Raise the chance of heart disease and stroke</li>
+    </ul>
+    <p>Even conditions like <strong>sleep apnea </strong>(loud snoring with breathing pauses) are linked directly to heart problems.</p>
+  
+    <h3>Habits for Less Stress & Better Sleep</h3>
+    <ul>
+      <li>Practice deep breathing, meditation, or yoga daily.</li>
+      <li>Limit late-night screen time, and use blue light to keeps your brain awake.</li>
+      <li>Sleep at a regular time each day.</li>
+      <li>Take short breaks during work instead of constant long hours.</li>
+      <li>Stay active, and do exercise to reduces stress and improves sleep.</li>
+    </ul>
+
+    <h3>Final Thought</h3>
+      <p>Stress and sleep are like hidden controls of your heart. Too much stress is like pressing the accelerator nonstop, and too little sleep is like never refueling the engine. Balancing both keeps your heart steady, strong, and healthy.
+        </p>
+    </div>
+</section>  
+
+<footer>
+  <div class="footer-container">
+    <div class="footer-column">
+      <h4>Hridya Aarogya</h4>
+      <p>Your companion in early heart disease detection and awareness.</p>
+    </div>
+
+    <div class="footer-column">
+      <h4>Quick Links</h4>
+      <ul>
+        <li><a href="#">Home</a></li>
+        <li><a href="calculator.html">Heart Detector</a></li>
+        <li><a href="#articles">Articles</a></li>
+        <li><a href="doctor.html">Connect with Doctors</a></li>
+        <li><a href="contact.html">Contact Us</a></li>
+      </ul>
+    </div>
+
+    <div class="footer-column">
+      <h4>Contact</h4>
+      <p>Email: <a href="mailto:hridya.support@gmail.com">hridya.support@gmail.com</a></p>
+      <p>Phone: +91-*******</p>
+    </div>
+  </div>
+
+  <div class="footer-bottom">
+    <p>&copy; 2025 Hridya Aarogya. All rights reserved.</p>
+  </div>
+</footer>
+      
+
+    </div>
+  </section>
+</body>
+</html>

@@ -1,0 +1,385 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+  <!-- Boxicons -->
+  <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
+  <!-- Remix icons -->
+  <link href="https://cdn.jsdelivr.net/npm/remixicon/fonts/remixicon.css" rel="stylesheet">
+
+  <style>
+     /* ===== Root Variables (theme colors) ===== */
+:root {
+  --main-color: #000000;
+  --highlight-color: #000000;
+  --bg-color: #FFEEEE;
+  --text-color: #222;
+  --background: #fcdcdc;
+  --primary: #E63946;
+  --charcoal: #1F2937;
+  --gray: #6B7280;
+  --success: #22C55E;
+  --warning: #F59E0B;
+  --info: #2563EB;
+}
+
+/* ===== Reset ===== */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body, html {
+  height: 100%;
+  font-family: Arial, sans-serif;
+  background: var(--bg-color);
+  color: var(--text-color);
+}
+
+/* ===== Cover Image Section ===== */
+.home-top {
+  height: 70vh;  /* covers 70% of viewport height */
+  background: url("pics/bp.jpg") no-repeat center/cover;
+  position: relative;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  color: white;
+}
+
+.home-top::after {
+  content: "";
+  position: absolute;
+  top: 0; left: 0;
+  width: 100%; height: 100%;
+  background: rgba(34,34,59,0.5); /* overlay */
+}
+
+.home-top-content {
+  position: relative;
+  z-index: 2;
+  max-width: 700px;
+}
+
+.home-top-content h1 {
+  font-size: 3.5rem;
+  font-weight: 700;
+  margin-bottom: 1rem;
+}
+
+.home-top-content p {
+  font-size: 1.4rem;
+  line-height: 1.6;
+}
+
+
+
+/* ===== BP Info Section ===== */
+.bp-info {
+  background: #ffd4d4;
+  padding: 3rem 9%;
+  text-align: left;
+}
+
+.bp-info h2 {
+  font-size: 2.4rem;
+  color: var(--main-color);
+  margin-bottom: 1rem;
+}
+
+.bp-info h3 {
+  font-size: 2rem;
+  color: var(--highlight-color);
+  margin-top: 2rem;
+  margin-bottom: 0.5rem;
+}
+
+.bp-info p {
+  font-size: 1.2rem;
+  line-height: 1.6;
+  margin: 0.5rem 0 1rem;
+  color: var(--text-color);
+}
+
+.bp-info ul {
+  font-size: 1.2rem;
+  line-height: 1.6;
+  margin: 0.5rem 0 1.5rem 1.5rem;
+  padding-left: 1rem;
+}
+
+.bp-info ul li {
+  margin-bottom: 0.5rem;
+}
+
+.bp-highlight {
+  font-weight: 600;
+  color: #333;
+  margin-top: 1rem;
+}
+
+.home-top {
+  position: relative; /* anchor for absolute children */
+  height: 70vh;
+  background: url("/static/cho.jpg") no-repeat center/cover;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  color: white;
+}
+
+.image-credit {
+  position: absolute;
+  bottom: 10px;
+  right: 15px;
+  font-size: 0.9rem;
+  color: #000000;   /* pure white */
+  font-style: bold;
+  font-weight: 10000; /* optional: makes it a bit more readable */
+  pointer-events: none;
+}
+
+header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background: #E63946;
+  padding: 15px 60px;
+  box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+  border-radius: 0 0 20px 20px;
+}
+
+header .logo img {
+  height: 55px;
+  border-radius: 10px;
+}
+
+header nav ul {
+  list-style: none;
+  display: flex;
+  gap: 35px;
+  align-items: center;
+  margin: 0;
+  padding: 0;
+}
+
+header nav ul li a {
+  text-decoration: none;
+  color: white;
+  font-weight: 600;
+  transition: 0.3s;
+}
+
+header nav ul li a:hover {
+  color: #FFDCDC;
+  text-shadow: 1px 1px 5px rgba(0,0,0,0.3);
+}
+
+.login-btn {
+  padding: 8px 15px;
+  background: #F2E9E4;
+  color: #E63946;
+  font-weight: 600;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: 0.3s;
+}
+
+.login-btn:hover {
+  background: #fff;
+  color: #E63946;
+  box-shadow: 0 5px 10px rgba(0,0,0,0.2);
+  transform: translateY(-2px);
+}
+footer {
+  background-color: #E63946;
+  color: #F2E9E4;
+  padding: 40px 20px 10px;
+  font-family: 'Segoe UI', sans-serif;
+}
+
+.footer-container {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  max-width: 1200px;
+  margin: auto;
+  padding-bottom: 20px;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.2);
+}
+
+.footer-column {
+  flex: 1 1 250px;
+  margin: 10px;
+}
+
+.footer-column h4 {
+  font-size: 20px;
+  margin-bottom: 15px;
+  color: #F2E9E4;
+}
+
+.footer-column p,
+.footer-column li,
+.footer-column a {
+  font-size: 15px;
+  color: #C9ADA7;
+  text-decoration: none;
+  line-height: 1.7;
+}
+
+.footer-column a:hover {
+  color: #ffffff;
+  text-decoration: underline;
+}
+
+.footer-column ul {
+  list-style: none;
+  padding: 0;
+}
+
+.footer-bottom {
+  text-align: center;
+  padding: 15px 0;
+  font-size: 14px;
+  color: #C9ADA7;
+}
+
+  </style>
+
+
+
+</head>
+<body>
+
+<!-- Header -->
+<header>
+  <div class="logo">
+    <img src="/static/logo.jpg" alt="My Logo">
+  </div>
+  <nav>
+    <ul id="nav-menu">
+      <li><a href="/">Home</a></li> <!-- ✅ Changed -->
+      <li><a href="/calculator">Detector</a></li> <!-- ✅ Changed -->
+      <li><a href="#articles">Articles</a></li>
+      <li><a href="/doctor">Connect with doctors</a></li> <!-- ✅ Changed -->
+      <li><a href="/aboutus">About Us</a></li> <!-- ✅ Changed -->
+      <li><a href="/contact">Contact Us</a></li> <!-- ✅ Changed -->
+      <li><button class="login-btn" onclick="openLoginModal()">Login</button></li>
+    </ul>
+  </nav>
+</header>
+
+  <section class="home" id="home">
+    <!-- Top 70% Background with space for text -->
+    <div class="home-top">
+  <div class="home-top-content">
+    <h1>What is Cholesterol? <br>(Good vs Bad Fats in Your Blood)</h1>
+    <p>
+      Cholesterol is a fatty, wax-like substance found in your blood. Your body actually needs some cholesterol to build cells and make hormones. But too much of the wrong kind can cause trouble.
+    </p>
+  </div>
+
+  <!-- Credit line -->
+  <div class="image-credit">Edited by-Shruti Rai</div>
+</div>
+
+    <!-- Bottom 30% White Content -->
+    <div class="home-bottom">
+     
+     <!-- BP Info Section starts BELOW the image -->
+<section class="bp-info">
+  <div class="bp-container">
+    <h2>What is Cholestrol?</h2>
+    <p>
+      Cholesterol is a fat-like substance found in your blood. It travels through your body attached to proteins, forming what’s called lipoproteins.
+    </p>
+
+    <h3>There are two main types:</h3>
+    <ul>
+      <strong>LDL (Low-Density Lipoprotein): “Bad Cholesterol”</strong>
+        <li>Builds up on artery walls, forming blockages (plaques).</li>
+        <li>Narrowed arteries make it harder for blood to flow → risk of heart attack or stroke.</li>
+
+
+      <strong>HDL (High-Density Lipoprotein): “Good Cholesterol”</strong> 
+      <li>Cleans your blood by carrying LDL back to the liver, where it’s broken down.</li>
+      <li>Protects your heart.</li>
+    </ul>
+    <p>Most people think cholesterol is always “bad.” But that’s not true—your body actually needs cholesterol to build cells and make hormones. The problem starts when there’s too much of the wrong kind.</p>
+
+    <h3>Why Too Much Bad Cholesterol is Dangerous</h3>
+    <p>
+      High LDL can:
+    </p>
+    <ul>
+      <li>Clog arteries (like grease in kitchen pipes).</li>
+      <li>Increase risk of heart attack, stroke, and poor circulation.</li>
+      <li>Force your heart to work harder.</li>
+    </ul>
+
+    <h3>How to Keep Cholesterol Balanced</h3>
+    <ul>
+      <li>Eat healthy fats → olive oil, nuts, fish, avocado.</li>
+      <li>Avoid trans fats & excess fried food → they raise LDL.</li>
+      <li>Stay active → exercise helps raise HDL (the good kind).</li>
+      <li>Quit smoking & limit alcohol.</li>
+      <li>Get your levels checked—cholesterol problems often have no symptoms.</li>
+    </ul>
+
+    <h3>Final Thought</h3>
+    <p>
+      Think of cholesterol as fat traffic in your blood:
+    </p>
+    <ul>
+      <li>Too many “bad” cars (LDL) jam the road.</li>
+      <li>Enough “good” cars (HDL) clear the way.</li>
+    </ul>
+    <p class="bp-highlight">
+       Keeping the balance means smoother flow, a healthier heart, and a longer life.
+
+    </p>
+  </div>
+</section>
+
+     <footer>
+  <div class="footer-container">
+    <div class="footer-column">
+      <h4>Hridya Aarogya</h4>
+      <p>Your companion in early heart disease detection and awareness.</p>
+    </div>
+
+    <div class="footer-column">
+      <h4>Quick Links</h4>
+      <ul>
+        <li><a href="#">Home</a></li>
+        <li><a href="calculator.html">Heart Detector</a></li>
+        <li><a href="#articles">Articles</a></li>
+        <li><a href="doctor.html">Connect with Doctors</a></li>
+        <li><a href="contact.html">Contact Us</a></li>
+      </ul>
+    </div>
+
+    <div class="footer-column">
+      <h4>Contact</h4>
+      <p>Email: <a href="mailto:hridya.support@gmail.com">hridya.support@gmail.com</a></p>
+      <p>Phone: +91-*******</p>
+    </div>
+  </div>
+
+  <div class="footer-bottom">
+    <p>&copy; 2025 Hridya Aarogya. All rights reserved.</p>
+  </div>
+</footer>
+
+      
+    </div>
+  </section>
+</body>
+</html>

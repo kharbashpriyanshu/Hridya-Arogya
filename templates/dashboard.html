@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Submission Dashboard</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background: #f3f4f6;
+      padding: 40px;
+    }
+
+    h1 {
+      text-align: center;
+      color: #E63946;
+    }
+
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      margin-top: 30px;
+      background: white;
+      border-radius: 10px;
+      overflow: hidden;
+      box-shadow: 0 0 15px rgba(0, 0, 0, 0.1);
+    }
+
+    th, td {
+      padding: 12px 16px;
+      border-bottom: 1px solid #e2e8f0;
+      text-align: center;
+    }
+
+    th {
+      background-color: #E63946;
+      color: white;
+      font-weight: bold;
+    }
+
+    tr:hover {
+      background-color: #f1f1f1;
+    }
+  </style>
+</head>
+<body>
+
+  <h1>Submitted Heart Risk Assessments</h1>
+  <table id="data-table">
+    <thead>
+      <tr>
+        <th>Age</th>
+        <th>Sex</th>
+        <th>CP</th>
+        <th>RestBP</th>
+        <th>Chol</th>
+        <th>FBS</th>
+        <th>RestECG</th>
+        <th>Thalach</th>
+        <th>Exang</th>
+        <th>Oldpeak</th>
+        <th>Slope</th>
+        <th>CA</th>
+        <th>Thal</th>
+      </tr>
+    </thead>
+    <tbody id="table-body">
+      <!-- Data rows will be inserted here -->
+    </tbody>
+  </table>
+
+  <!-- Firebase -->
+  <script type="module">
+    import { initializeApp } from "https://www.gstatic.com/firebasejs/10.12.0/firebase-app.js";
+    import { getFirestore, collection, getDocs } from "https://www.gstatic.com/firebasejs/10.12.0/firebase-firestore.js";
+
+    const firebaseConfig = {
+      apiKey: "AIzaSyB2Y03pC09bxB8w6TzSxR45bkA4k_SgYxs",
+      authDomain: "hridya-hackathon-51785.firebaseapp.com",
+      projectId: "hridya-hackathon-51785",
+      storageBucket: "hridya-hackathon-51785.appspot.com",
+      messagingSenderId: "38950160855",
+      appId: "1:38950160855:web:7756799d68c61cef0e6392"
+    };
+
+    const app = initializeApp(firebaseConfig);
+    const db = getFirestore(app);
+
+    const tableBody = document.getElementById('table-body');
+
+    async function loadData() {
+      const querySnapshot = await getDocs(collection(db, "form_submissions"));
+      querySnapshot.forEach((doc) => {
+        const data = doc.data();
+        const row = document.createElement('tr');
+        row.innerHTML = `
+          <td>${data.age || ""}</td>
+          <td>${data.sex || ""}</td>
+          <td>${data.cp || ""}</td>
+          <td>${data.restbp || ""}</td>
+          <td>${data.chol || ""}</td>
+          <td>${data.fbs || ""}</td>
+          <td>${data.restecg || ""}</td>
+          <td>${data.thalach || ""}</td>
+          <td>${data.exang || ""}</td>
+          <td>${data.oldpeak || ""}</td>
+          <td>${data.slope || ""}</td>
+          <td>${data.ca || ""}</td>
+          <td>${data.thal || ""}</td>
+        `;
+        tableBody.appendChild(row);
+      });
+    }
+
+    loadData();
+  </script>
+
+</body>
+</html>

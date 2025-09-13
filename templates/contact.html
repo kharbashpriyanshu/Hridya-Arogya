@@ -1,0 +1,251 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Contact Form</title>
+  <style>
+    /* Background image */
+    body {
+      font-family: Arial, sans-serif;
+      background: url("/static/bg.jpg") no-repeat center center/cover;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+      margin: 0;
+    }
+
+    /* Glassmorphism form */
+    .contact-form {
+      background: rgba(0, 0, 0, 0.5); /* dark transparent */
+      backdrop-filter: blur(9px);
+      -webkit-backdrop-filter: blur(12px);
+      padding: 25px;
+      border-radius: 12px;
+      box-shadow: 0 4px 15px rgba(0,0,0,0.3);
+      width: 350px;
+      color: #fff;
+    }
+
+    .contact-form h2 {
+      text-align: center;
+      margin-bottom: 20px;
+      color: #fff;
+    }
+
+    .form-group {
+      margin-bottom: 15px;
+    }
+
+    .form-group label {
+      display: block;
+      margin-bottom: 6px;
+      color: #fff;
+      font-size: 16px;
+      font-weight: bold;
+    }
+
+    .form-group input,
+    .form-group textarea {
+      width: 100%;
+      padding: 10px;
+      border: 1px solid rgba(0, 0, 0, 0.2);
+      border-radius: 6px;
+      font-size: 16px;
+      font-weight: normal;
+      background: rgba(255, 255, 255, 0.9); /* visible field */
+      color: #000; /* black text */
+      outline: none;
+      transition: 0.3s;
+    }
+
+    .form-group input:focus,
+    .form-group textarea:focus {
+      border-color: #c6ffc8;
+      box-shadow: 0 0 6px #c6ffc8;
+    }
+
+    .form-group input::placeholder,
+    .form-group textarea::placeholder {
+      color: #555; /* grey placeholder */
+    }
+
+    textarea {
+      resize: none;
+      height: 80px;
+    }
+
+    .checkbox-group {
+      display: flex;
+      gap: 10px;
+      margin-top: 10px;
+    }
+
+    .checkbox-btn {
+      position: relative;
+      display: inline-block;
+    }
+
+    .checkbox-btn input {
+      display: none;
+    }
+
+    .checkbox-btn label {
+      padding: 8px 14px;
+      border: 1px solid rgba(255, 255, 255, 0.6);
+      border-radius: 20px;
+      cursor: pointer;
+      font-size: 15px;
+      background: rgba(255, 255, 255, 0.15);
+      color: #fff;
+      transition: 0.3s;
+    }
+
+    .checkbox-btn input:checked + label {
+      background: #c6ffc8;
+      color: #000;
+      border-color: #c6ffc8;
+    }
+
+    .submit-btn {
+      width: 100%;
+      padding: 12px;
+      border: none;
+      border-radius: 6px;
+      background: #c6ffc8;
+      color: #000;
+      font-size: 16px;
+      font-weight: bold;
+      cursor: pointer;
+      margin-top: 15px;
+      transition: 0.3s;
+    }
+
+    .submit-btn:hover {
+      background: #45a049;
+      color: #fff;
+      transform: scale(1.05);
+    }
+  </style>
+</head>
+<body>
+  <div class="contact-form">
+    <h2>Contact Us</h2>
+
+    <form id="contactForm">
+      <div class="form-group">
+        <label for="username">Username</label>
+        <input type="text" name="username" id="username" placeholder="Enter your name" required>
+      </div>
+
+      <div class="form-group">
+        <label for="phone">Phone Number</label>
+        <input type="tel" name="phone" id="phone" placeholder="Enter phone number" required>
+      </div>
+
+      <div class="form-group">
+        <label for="subject">Subject</label>
+        <input type="text" name="subject" id="subject" placeholder="Enter subject">
+      </div>
+
+      <div class="form-group">
+        <label for="comments">Comments</label>
+        <textarea name="comments" id="comments" placeholder="Write your comments"></textarea>
+      </div>
+
+      <div class="form-group">
+        <label>Choose Options</label>
+        <div class="checkbox-group">
+          <div class="checkbox-btn">
+            <input type="checkbox" id="article" name="options[]" value="Publish Article">
+            <label for="article">Publish Article</label>
+          </div>
+          <div class="checkbox-btn">
+            <input type="checkbox" id="care" name="options[]" value="Customer Care">
+            <label for="care">Customer Care</label>
+          </div>
+          <div class="checkbox-btn">
+            <input type="checkbox" id="doctor" name="options[]" value="Contact with Doctor">
+            <label for="doctor">Contact With Doctor</label>
+          </div>
+        </div>
+      </div>
+
+      <button type="submit" class="submit-btn">Submit</button>
+    </form>
+  </div>
+
+  <script type="module">
+  // Firebase modular SDK (v10+)
+  import { initializeApp } from "https://www.gstatic.com/firebasejs/10.12.0/firebase-app.js";
+  import { getAuth, onAuthStateChanged } from "https://www.gstatic.com/firebasejs/10.12.0/firebase-auth.js";
+  import { getFirestore, collection, addDoc, serverTimestamp } from "https://www.gstatic.com/firebasejs/10.12.0/firebase-firestore.js";
+
+  // <-- your firebaseConfig (use the same one you used elsewhere) -->
+  const firebaseConfig = {
+    apiKey: "AIzaSyB2Y03pC09bxB8w6TzSxR45bkA4k_SgYxs",
+    authDomain: "hridya-hackathon-51785.firebaseapp.com",
+    projectId: "hridya-hackathon-51785",
+    storageBucket: "hridya-hackathon-51785.appspot.com",
+    messagingSenderId: "38950160855",
+    appId: "1:38950160855:web:7756799d68c61cef0e6392"
+  };
+
+  // init
+  const app = initializeApp(firebaseConfig);
+  const auth = getAuth(app);
+  const db = getFirestore(app);
+
+  // Keep current user email (null if not signed in)
+  let currentUserEmail = null;
+  onAuthStateChanged(auth, user => {
+    currentUserEmail = user ? user.email : null;
+    // (Optional) show user email somewhere in the UI
+    // console.log("Signed in user:", currentUserEmail);
+  });
+
+  // Form handling
+  const contactForm = document.getElementById("contactForm");
+  contactForm.addEventListener("submit", async (e) => {
+    e.preventDefault(); // stop normal form POST
+
+    // Collect values
+    const name = document.getElementById("username").value.trim();
+    const phone = document.getElementById("phone").value.trim();
+    const subject = document.getElementById("subject").value.trim();
+    const comments = document.getElementById("comments").value.trim();
+    const optionsEls = Array.from(document.querySelectorAll("input[name='options[]']:checked"));
+    const options = optionsEls.map(el => el.value);
+
+    // Basic validation (you can expand)
+    if (!name || !phone || !comments) {
+      alert("Please fill in name, phone and comments.");
+      return;
+    }
+
+    // Prepare payload
+    const payload = {
+      name,
+      phone,
+      subject: subject || null,
+      message: comments,
+      options: options.length ? options : null,
+      userEmail: currentUserEmail || null,
+      createdAt: serverTimestamp()
+    };
+
+    // Save into Firestore
+    try {
+      await addDoc(collection(db, "contact_messages"), payload);
+      alert("Thank you — your message has been submitted!");
+      contactForm.reset();
+    } catch (err) {
+      console.error("Error saving contact message:", err);
+      alert("Submission failed. Check console and try again.");
+    }
+  });
+</script>
+
+</body>
+</html>

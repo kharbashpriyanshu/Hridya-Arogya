@@ -1,0 +1,405 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+  <!-- Boxicons -->
+  <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
+  <!-- Remix icons -->
+  <link href="https://cdn.jsdelivr.net/npm/remixicon/fonts/remixicon.css" rel="stylesheet">
+
+  <style>
+     /* ===== Root Variables (theme colors) ===== */
+:root {
+  --main-color: #000000;
+  --highlight-color: #000000;
+  --bg-color: #FFEEEE;
+  --text-color: #222;
+  --background: #fcdcdc;
+  --primary: #E63946;
+  --charcoal: #1F2937;
+  --gray: #6B7280;
+  --success: #22C55E;
+  --warning: #F59E0B;
+  --info: #2563EB;
+}
+
+/* ===== Reset ===== */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body, html {
+  height: 100%;
+  font-family: Arial, sans-serif;
+  background: var(--bg-color);
+  color: var(--text-color);
+}
+
+/* ===== Cover Image Section ===== */
+.home-top {
+  height: 70vh;
+  background: url("{{ url_for('static', filename='hb.jpg') }}") no-repeat center/cover;
+  position: relative;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  color: white;
+}
+
+
+.home-top::after {
+  content: "";
+  position: absolute;
+  top: 0; left: 0;
+  width: 100%; height: 100%;
+  background: rgba(34,34,59,0.5); /* overlay */
+}
+
+.home-top-content {
+  position: relative;
+  z-index: 2;
+  max-width: 700px;
+}
+
+.home-top-content h1 {
+  font-size: 3.5rem;
+  font-weight: 700;
+  margin-bottom: 1rem;
+}
+
+.home-top-content p {
+  font-size: 1.4rem;
+  line-height: 1.6;
+}
+
+
+
+/* ===== BP Info Section ===== */
+.bp-info {
+  background: #ffd4d4;
+  padding: 3rem 9%;
+  text-align: left;
+}
+
+.bp-info h2 {
+  font-size: 2.4rem;
+  color: var(--main-color);
+  margin-bottom: 1rem;
+}
+
+.bp-info h3 {
+  font-size: 2rem;
+  color: var(--highlight-color);
+  margin-top: 2rem;
+  margin-bottom: 0.5rem;
+}
+
+.bp-info p {
+  font-size: 1.2rem;
+  line-height: 1.6;
+  margin: 0.5rem 0 1rem;
+  color: var(--text-color);
+}
+
+.bp-info ul {
+  font-size: 1.2rem;
+  line-height: 1.6;
+  margin: 0.5rem 0 1.5rem 1.5rem;
+  padding-left: 1rem;
+}
+
+.bp-info ul li {
+  margin-bottom: 0.5rem;
+}
+
+.bp-highlight {
+  font-weight: 600;
+  color: #333;
+  margin-top: 1rem;
+}
+
+
+
+.image-credit {
+  position: absolute;
+  bottom: 10px;
+  right: 15px;
+  font-size: 0.9rem;
+  color: #000000;   /* pure white */
+  font-style: bold;
+  font-weight: 10000; /* optional: makes it a bit more readable */
+  pointer-events: none;
+}
+
+header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background: #E63946;
+  padding: 15px 60px;
+  box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+  border-radius: 0 0 20px 20px;
+}
+
+header .logo img {
+  height: 55px;
+  border-radius: 10px;
+}
+
+header nav ul {
+  list-style: none;
+  display: flex;
+  gap: 35px;
+  align-items: center;
+  margin: 0;
+  padding: 0;
+}
+
+header nav ul li a {
+  text-decoration: none;
+  color: white;
+  font-weight: 600;
+  transition: 0.3s;
+}
+
+header nav ul li a:hover {
+  color: #FFDCDC;
+  text-shadow: 1px 1px 5px rgba(0,0,0,0.3);
+}
+
+.login-btn {
+  padding: 8px 15px;
+  background: #F2E9E4;
+  color: #E63946;
+  font-weight: 600;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: 0.3s;
+}
+
+.login-btn:hover {
+  background: #fff;
+  color: #E63946;
+  box-shadow: 0 5px 10px rgba(0,0,0,0.2);
+  transform: translateY(-2px);
+}
+
+footer {
+  background-color: #E63946;
+  color: #F2E9E4;
+  padding: 40px 20px 10px;
+  font-family: 'Segoe UI', sans-serif;
+}
+
+.footer-container {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  max-width: 1200px;
+  margin: auto;
+  padding-bottom: 20px;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.2);
+}
+
+.footer-column {
+  flex: 1 1 250px;
+  margin: 10px;
+}
+
+.footer-column h4 {
+  font-size: 20px;
+  margin-bottom: 15px;
+  color: #F2E9E4;
+}
+
+.footer-column p,
+.footer-column li,
+.footer-column a {
+  font-size: 15px;
+  color: #C9ADA7;
+  text-decoration: none;
+  line-height: 1.7;
+}
+
+.footer-column a:hover {
+  color: #ffffff;
+  text-decoration: underline;
+}
+
+.footer-column ul {
+  list-style: none;
+  padding: 0;
+}
+
+.footer-bottom {
+  text-align: center;
+  padding: 15px 0;
+  font-size: 14px;
+  color: #C9ADA7;
+}
+
+  </style>
+
+
+
+</head>
+<body>
+
+<!-- Header -->
+<header>
+  <div class="logo">
+    <img src="/static/logo.jpg" alt="My Logo">
+  </div>
+  <nav>
+    <ul id="nav-menu">
+      <li><a href="/">Home</a></li> <!-- ✅ Changed -->
+      <li><a href="/calculator">Detector</a></li> <!-- ✅ Changed -->
+      <li><a href="#articles">Articles</a></li>
+      <li><a href="/doctor">Connect with doctors</a></li> <!-- ✅ Changed -->
+      <li><a href="/aboutus">About Us</a></li> <!-- ✅ Changed -->
+      <li><a href="/contact">Contact Us</a></li> <!-- ✅ Changed -->
+      <li><button class="login-btn" onclick="openLoginModal()">Login</button></li>
+    </ul>
+  </nav>
+</header>
+
+
+  <section class="home" id="home">
+    <!-- Top 70% Background with space for text -->
+    <div class="home-top">
+  <div class="home-top-content">
+    <h1>Simple Daily Habits to Keep Your Heart Healthy <br></h1>
+    <p>A strong heart also protects you from serious problems like heart attack and stroke. Taking care of it today ensures a longer, happier, and more active tomorrow.
+    </p>
+  </div>
+
+  <!-- Credit line -->
+  <div class="image-credit">Edited by-Priyanshu Kharbash</div>
+</div>
+
+    <!-- Bottom 30% White Content -->
+    <div class="home-bottom">
+     
+     <!-- BP Info Section starts BELOW the image -->
+<section class="bp-info">
+  <div class="bp-container">
+    <h2>Why to keep your heart healthy?</h2>
+    <p>
+Your heart is the engine of your body—it works 24/7 without rest. The best way to take care of it isn’t through expensive treatments but through small everyday habits that add up over time.
+    </p>
+
+
+    <h3>1. Walk and Move More</h3>
+    <ul>
+      <li>Aim for 30 minutes of brisk walking daily.</li>
+      <li>Take stairs instead of elevators.</li>
+      <li>Short walks after meals help control sugar and blood pressure.</li>
+    </ul>
+
+    <h3>2. Eat Smart, Eat Light</h3>
+    <ul>
+      <li>Reduce fried, oily, and junk food.</li>
+      <li>Add fruits, vegetables, nuts, and whole grains to your meals.</li>
+      <li>Use healthier oils like mustard or olive oil in small amounts.</li>
+      <li>Limit salt and sugar—too much raises blood pressure and diabetes risk.</li>
+    </ul>
+
+    <h3>3. Say No to Smoking & Tobacco</h3>
+    <ul>
+      <li>Smoking damages arteries, lowers good cholesterol, and increases clot risk.</li>
+      <li>Even one cigarette a day harms the heart.</li>
+      <li>Quitting at any age quickly reduces heart attack risk.</li>
+    </ul>
+
+    <h3> 4. Drink More Water</h3>
+    <ul>
+      <li>Replace sugary drinks with water, lemon water, or coconut water.</li>
+      <li>Staying hydrated keeps blood flowing smoothly.</li>
+    </ul>
+
+    <h3>5. Sleep Well</h3>
+    <ul>
+      <li>Adults need 7–8 hours of good sleep daily.</li>
+      <li>Poor sleep raises blood pressure, stress, and cholesterol.</li>
+    </ul>
+
+    <h3>6. Manage Stress</h3>
+    <ul>
+      <li>Extra weight makes your heart work harder.</li>
+      <li>Focus on balanced eating and regular exercise, not crash diets.</li>
+    </ul>
+
+    <h3>7. Maintain a Healthy Weight</h3>
+    <ul>
+      <li>Aim for 30 minutes of brisk walking daily.</li>
+      <li>Take stairs instead of elevators.</li>
+      <li>Short walks after meals help control sugar and blood pressure.</li>
+    </ul>
+
+    <h3>8. Get Regular Checkups</h3>
+    <ul>
+      <li>Measure blood pressure, sugar, and cholesterol regularly.</li>
+      <li>Early detection prevents serious heart problems.</li>
+    </ul>
+
+    <h3>9. Limit Alcohol</h3>
+    <ul>
+      <li>Excess alcohol raises BP and damages the heart.</li>
+      <li>If you drink, keep it occasional and moderate.</li>
+    </ul>
+
+    <h3>10. Stay Active Beyond Exercise</h3>
+    <ul>
+      <li>Gardening, cycling, cleaning the house, or even dancing counts as activity.</li>
+      <li>Sitting too long (like TV or mobile use) increases risk—take breaks and stretch.</li>
+    </ul>
+
+    <h3>Final Thought</h3>
+    <p>
+     Your heart doesn’t need big sacrifices—just small, consistent habits: walk more, eat fresh, sleep well, drink water, and avoid smoking. Think of it as daily “maintenance” for your engine. A well-cared heart beats stronger, longer, and happier.
+    </p>
+    
+  </div>
+</section>
+
+     
+<footer>
+  <div class="footer-container">
+    <div class="footer-column">
+      <h4>Hridya Aarogya</h4>
+      <p>Your companion in early heart disease detection and awareness.</p>
+    </div>
+
+    <div class="footer-column">
+      <h4>Quick Links</h4>
+      <ul>
+        <li><a href="#">Home</a></li>
+        <li><a href="calculator.html">Heart Detector</a></li>
+        <li><a href="#articles">Articles</a></li>
+        <li><a href="doctor.html">Connect with Doctors</a></li>
+        <li><a href="contact.html">Contact Us</a></li>
+      </ul>
+    </div>
+
+    <div class="footer-column">
+      <h4>Contact</h4>
+      <p>Email: <a href="mailto:hridya.support@gmail.com">hridya.support@gmail.com</a></p>
+      <p>Phone: +91-*******</p>
+    </div>
+  </div>
+
+  <div class="footer-bottom">
+    <p>&copy; 2025 Hridya Aarogya. All rights reserved.</p>
+  </div>
+</footer>
+      
+    </div>
+  </section>
+</body>
+</html>

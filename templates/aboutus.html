@@ -1,0 +1,206 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Simple Page with Team Introductions</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      margin: 0;
+      background: #faefef;
+      color: #222;
+      line-height: 1.5;
+    }
+
+    .page {
+      max-width: 800px;
+      margin: 32px auto;
+      background: #ffffff;
+      border-radius: 8px;
+      padding: 24px;
+      box-shadow: 0 6px 18px rgba(0,0,0,0.06);
+    }
+
+    .title {
+      font-size: 30px;
+      font-weight: 700;
+      color: #0b2545;
+      margin-bottom: 18px;
+    }
+
+    .main-text {
+      background: #ffe2e2;
+      padding: 18px;
+      border-radius: 6px;
+      border: 1px dashed #e0e6f0;
+      margin-bottom: 26px;
+      min-height: 120px;
+    }
+    .main-text .hint { color: #667; font-size: 16px; }
+
+    /* Each person block */
+    .person {
+      display: flex;
+      align-items: center;
+      gap: 16px;
+      background: #e6ffdf;
+      border: 1px solid #eef2fb;
+      border-radius: 8px;
+      padding: 12px;
+      margin-bottom: 16px;
+    }
+
+    .avatar {
+      width: 80px;
+      height: 80px;
+      border-radius: 8px;
+      object-fit: cover;
+      background: #ddd;
+      flex-shrink: 0;
+    }
+
+    .person-info {
+      flex: 1;
+    }
+    .person-name {
+      font-weight: 800;
+      margin: 0 0 4px 0;
+      color: #09203a;
+    }
+    .person-role {
+      margin: 0 0 6px 0;
+      font-size: 16px;
+      color: #4b5b6b;
+    }
+    .person-bio {
+      margin: 0;
+      font-size: 15px;
+      color: #3a4855;
+    }
+
+    /* Vertical stack */
+    @media (max-width: 480px) {
+      .person { flex-direction: column; align-items: flex-start; }
+      .avatar { width: 100%; height: auto; }
+    }
+  </style>
+</head>
+<body>
+  <div class="page">
+    <h1 class="title">About HridyaArogya</h1>
+
+    <!-- HridyaAarogya -->
+    <div class="main-text">
+      <p class="hint">HridyaArogya is a dedicated platform designed to empower individuals with early insights into their heart health. Our mission is to provide a simple, reliable, and accessible solution for predicting the risk of heart disease through advanced data analysis.
+By collecting key health parameters such as blood pressure, cholesterol levels, diabetes status, and other relevant medical information, HridayArogya analyzes your health profile to identify potential risks associated with heart disease. Our goal is to raise awareness and encourage proactive management of heart health before complications arise.
+<br>At HridayArogya, we believe that timely detection is the first step towards a healthier heart. Whether you are looking to monitor your cardiovascular health or seek guidance, our platform offers a one-stop solution for all your heart-related concerns.
+Together, let’s take charge of heart health and pave the way for a healthier tomorrow.
+</p>
+    </div>
+
+<div class="page">
+    <h1 class="title">About Rashtriya Raksha University (RRU)</h1>
+
+    <!-- RRU -->
+    <div class="main-text">
+      <p class="hint">Rashtriya Raksha University (RRU) is a national-level institution located in Gandhinagar, Gujarat, established under the Ministry of Home Affairs as an Institution of National Importance. It is dedicated to education, research, and training in areas related to national security, internal safety, policing, cybercrime, forensic science, and strategic studies. With a strong focus on interdisciplinary learning and innovation, RRU offers undergraduate to doctoral programs and collaborates with various government and security agencies. The university also has multiple regional campuses across India, supporting specialized domains like border management, coastal security, and cyber defense.
+
+</p>
+    </div>
+
+
+    <div class="page">
+    <h1 class="title">Smart India Hackathon (SIH) at RRU</h1>
+
+    <!-- SIH -->
+    <div class="main-text">
+      <p class="hint">
+        Smart India Hackathon (SIH) is one of the largest nationwide technology challenges organized by the Government of India. It brings together students, professionals, and innovators from across the country to collaborate on solving real-world problems posed by government ministries, industries, and organizations.<br> The event encourages creative thinking, teamwork, and practical solutions through software and hardware development. SIH aims to promote innovation and build a culture of problem-solving that can drive positive change in society.
+</p>
+    </div>
+    <h2 style="font-size:20px;color:#0b2545;margin-bottom:12px;">Meet the Team Mentor</h2>
+<div class="person">
+      <div class="person-info">
+        <p class="person-name">Mr. Dhaval Deshkar</p>
+        <p class="person-role">Team Mentor</p>
+        <p class="person-bio">Mr. Dhaval Deshkar serves as an Assistant Professor in the School of Information Technology, Artificial Intelligence & Cyber Security (SITAICS) at Rashtriya Raksha University.
+            <br>He is passionate about applied Data Science, Data Analysis, Machine Learning, Computer Vision & IoT to solve real-world problems.
+            <br>He is also mentoring our team in the project HridyaAarogya in SIH.
+        </p>
+      </div>
+    </div>
+
+    <h2 style="font-size:20px;color:#0b2545;margin-bottom:12px;">Meet the Team</h2>
+
+    <!-- Developers -->
+     
+
+    <div class="person">
+      <img class="avatar" src="/static/sur.jpg" alt="Person 6 photo">
+      <div class="person-info">
+        <p class="person-name">Surya Prakash Singh</p>
+        <p class="person-role">Team Leader</p>
+        <p class="person-bio">I am Surya Prakash Singh, a 3rd-year B.Tech CSE student at Rashtriya Raksha University with deeply inclined toward Artificial Intelligence, with a vision to democratize computing knowledge for real-world impact.
+        <br>I actively explore deep learning, neural networks, and image processing, alongside strong foundations in network security and technical research.
+        <br>In the HridyaAarogya , I led the conceptualization of its functionalities and guided the team’s technical direction.
+        My core contribution was designing and training the machine learning model using medical datasets to ensure reliable predictions.</p>
+      </div>
+    </div>
+
+    
+<div class="person">
+      <img class="avatar" src="/static/shru.jpg" alt="Person 2 photo">
+      <div class="person-info">
+        <p class="person-name">Shruti Rai</p>
+        <p class="person-bio">I am Shruti Rai, passionate about Full-Stack Development and Cybersecurity, combining creativity and technical expertise to build applications that are secure, scalable, and user-friendly. Currently, for the Smart India Hackathon (SIH), I am designing the frontend of our website, focusing on creating an intuitive, visually engaging, and seamless user experience. I enjoy transforming ideas into practical digital solutions that solve real-world problems, empower users, and push the boundaries of innovation.
+        </p>
+      </div>
+    </div>
+
+
+  <div class="person">
+      <img class="avatar" src="/static/sam.jpg" alt="Person 1 photo">
+      <div class="person-info">
+        <p class="person-name">Sambhavi Chakraborty</p>
+        <p class="person-bio">I am Sambhavi Chakraborty, a 2nd-year B.Tech Computer Science and Engineering student with a specialization in Cyber Security at Rashtriya Raksha University. I have a strong interest in cybersecurity and digital forensics, and I actively participate in CTFs to sharpen my technical skills. I also enjoy hackathons, where I work on real-world challenges through teamwork and innovation. Currently, I am part of the Smart India Hackathon internal round, contributing to research work and assisting with the front-end development of our project HridyaAarogya.
+        </p>
+      </div>
+  </div>
+
+
+    <div class="person">
+      <img class="avatar" src="/static/hir.jpg" alt="Person 3 photo">
+      <div class="person-info">
+        <p class="person-name">Patel Hirva Narsinh</p>
+        <p class="person-bio">I am Patel Hirva Narsinh, a second-year student of B.Tech Computer Science and Engineering specializing in Cyber Security at Rashtriya Raksha University. I have a strong interest in cybersecurity and ethical hacking, and I actively engage in Capture The Flag (CTF) competitions and hackathons to enhance my technical skills. Currently, I am contributing to the internal round of the Smart India Hackathon (SIH), where I am responsible for full-stack development and documentation for our project, HridyaAarogya, while also assisting in the integration and application of generative AI technologies.
+        </p>
+      </div>
+    </div>
+
+
+    <div class="person">
+      <img class="avatar" src="/static/parth.jpg" alt="Person 4 photo">
+      <div class="person-info">
+        <p class="person-name">Parth Mathur</p>
+        <p class="person-bio">I am Parth Mathur, a 2rd-year B.Tech CSE  with specializing in Cyber Security student at Rashtriya Raksha University, with a strong passion for AI, computer vision, and innovative technology solutions. I actively participate in hackathons, research projects, and development initiatives, focusing on building intelligent systems that solve real-world problems. For the Smart India Hackathon (SIH), I am contributing by developing and integrating the AI model, conducting research related to the project, and ensuring seamless system performance. Drawing from my experience working on technology-driven startup projects, I strive to merge technical expertise with problem-solving skills to create impactful and scalable digital solutions.
+      </p>
+      </div>
+    </div>
+
+
+    <div class="person">
+      <img class="avatar" src="/static/pri.jpg" alt="Person 5 photo">
+      <div class="person-info">
+        <p class="person-name">Priyanshu Kharbash</p>
+        <p class="person-bio">I am a 2nd-year B.Tech CSE (Cyber Security) student at Rashtriya Raksha University, passionate about cybersecurity and digital forensics. I actively participate in CTFs and hackathons to strengthen my skills.
+          In the HridyaAarogya project, I developed the complete backend for secure and efficient data handling, and also designed graphics and presentations to make the project visually engaging and easy to understand.
+        </p>
+      </div>
+    </div>
+
+    
+
+  </div>
+</body>
+</html>

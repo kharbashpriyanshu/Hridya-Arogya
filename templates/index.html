@@ -1,0 +1,493 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Hridya Aarogya</title>
+  <link rel="stylesheet" href="/static/style.css">
+
+  
+</head>
+<body>
+ <header>
+  <div class="logo">
+    <img src="/static/logo.jpg" alt="My Logo">
+  </div>
+  <button class="menu-toggle" onclick="toggleMenu()">☰</button>
+  <nav>
+    <ul id="nav-menu">
+      <li><a href="/">Home</a></li> <!-- ✅ Changed -->
+      <li><a href="/calculator">Detector</a></li> <!-- ✅ Changed -->
+      <li><a href="#articles">Articles</a></li>
+      <li><a href="/doctor">Connect with doctors</a></li> <!-- ✅ Changed -->
+      <li><a href="/aboutus">About Us</a></li> <!-- ✅ Changed -->
+      <li><a href="/contact">Contact Us</a></li> <!-- ✅ Changed -->
+      <li><button class="login-btn" onclick="openLoginModal()">Login</button></li>
+    </ul>
+  </nav>
+</header>
+
+
+  <div id="loginModal" class="modal-overlay hidden">
+    <div class="modal-box">
+      <span class="close-btn" onclick="closeLoginModal()">&times;</span>
+      <h2>Login</h2>
+      <input type="email" placeholder="Email" required />
+      <input type="password" placeholder="Password" required />
+      <button class="auth-btn">Login</button>
+      <p class="switch-link">Don't have an account? <a href="#" onclick="switchToRegister()">Register</a></p>
+    </div>
+  </div>
+
+  <div id="registerModal" class="modal-overlay hidden">
+    <div class="modal-box">
+      <span class="close-btn" onclick="closeRegisterModal()">&times;</span>
+      <h2>Register</h2>
+      <input type="text" placeholder="Full Name" required />
+      <input type="email" placeholder="Email" required />
+      <input type="password" placeholder="Password" required />
+      <input type="password" placeholder="Confirm Password" required />
+      <button class="auth-btn">Register</button>
+      <p class="switch-link">Already have an account? <a href="#" onclick="switchToLogin()">Login</a></p>
+    </div>
+  </div>
+
+  <div id="loader">
+    <div class="spinner">
+      <img src="/static/logo1.jpg" alt="Logo" class="logo-img">
+      <div class="ball color1"></div>
+      <div class="ball color2"></div>
+      <div class="ball color3"></div>
+      <div class="ball color4"></div>
+      <div class="ball color5"></div>
+      <div class="ball color6"></div>
+    </div>
+  </div>
+
+  <section class="hero">
+    <img src="/static/banner.jpg" alt="Doctor with heart" class="hero-img">
+  </section>
+
+  <div class="overlay">
+    <h2>HridyaAarogya</h2>
+    <p>A user-friendly platform that predicts heart disease risk by analyzing key health parameters for early detection and awareness.</p>
+    <a href="/calculator" class="cta-btn">Detector</a>
+  </div>
+
+  <section class="articles-section" id="articles">
+    <h2>Latest Health Articles</h2>
+    <div class="arrow left" id="arrowLeft">&#10094;</div>
+    <div class="arrow right" id="arrowRight">&#10095;</div>
+    <div class="articles-slider" id="articleSlider">
+      <div class="article-card">
+        <img src="/static/bp.jpg" alt="doctor taking bp of a patient">
+        <div class="article-info">
+          <h3>Blood Pressure: Your Body’s Pressure Game!</h3>
+          <p>Your heart is a pump, blood vessels are pipes, and blood pressure keeps everything flowing. Too high damages arteries; too low leaves you dizzy. Aim for 120/80 mm Hg by walking, eating healthy, reducing salt, sleeping well, and managing stress. Balanced BP means a stronger, healthier heart.</p>
+          <a href="/article1_bp" class="learn-btn">Learn More</a>
+        </div>
+      </div>
+      <div class="article-card">
+        <img src="/static/cho.jpg" alt="Person having chest pain">
+        <div class="article-info">
+          <h3>Cholesterol: The Fat Traffic in Your Blood!</h3>
+          <p>Cholesterol fuels your body, but too much bad cholesterol (LDL) clogs arteries like a traffic jam, raising heart attack and stroke risk. Good cholesterol (HDL) clears the mess. Stay balanced by eating healthy, staying active, avoiding smoking, and getting checkups—low LDL and high HDL keep your heart strong and flowing.</p>
+          <a href="/article2_cho" class="learn-btn">Learn More</a>
+        </div>
+      </div>
+      <div class="article-card">
+        <img src="/static/dib.jpg" alt="People having sugar level test">
+        <div class="article-info">
+          <h3>Diabetes: When Sugar Turns Against Your Heart</h3>
+          <p>Diabetes isn’t just about sugar—it’s about energy use. Faulty insulin lets glucose build up, silently damaging arteries, raising blood pressure, and doubling heart attack or stroke risk. Watch for fatigue, thirst, or tingling. Protect your heart by monitoring sugar, eating well, staying active, and avoiding smoking.</p>
+          <a href="/article3_diabetes" class="learn-btn">Learn More</a>
+        </div>
+      </div>
+      <div class="article-card">
+        <img src="/static/hb.jpg" alt="Sleep and Heart">
+        <div class="article-info">
+          <h3>Your Heart’s Secret? Tiny Habits with Huge Power</h3>
+          <p>Your heart works nonstop and only asks for daily care. No extreme diets needed—just walk after meals, eat fruits instead of fried snacks, drink water, sleep well, quit smoking, move often, and laugh. These habits keep your heart young, arteries clear, and problems detectable early.</p>
+          <a href="/article4_habit" class="learn-btn">Learn More</a>
+        </div>
+      </div>
+      <div class="article-card">
+        <img src="/static/st.jpg" alt="A very stressed man">
+        <div class="article-info">
+          <h3>Stress & Sleep: The Hidden Levers of Your Heart</h3>
+          <p>Your heart reacts to stress and sleep. Constant stress raises blood pressure and strains arteries, while poor sleep increases risks of heart disease, stroke, and diabetes. Snoring may signal sleep apnea. Simple habits—deep breathing, moving, limiting screens, and relaxing—restore balance. Calm mind and good sleep keep your heart healthy.</p>
+          <a href="/article5_stress" class="learn-btn">Learn More</a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <div class="chatbot-btn" id="chatbotBtn">💬</div>
+  <div class="chatbot-popup" id="chatbotPopup">
+    <div class="chatbot-header">
+      <h4>Hridya Bot</h4>
+      <span class="chatbot-close" id="chatbotClose">&times;</span>
+    </div>
+    <div class="chatbot-body" id="chatbox">
+      <div class="bot-message">Hello! I can help you with heart health info. Ask me anything.</div>
+    </div>
+    <div class="chatbot-footer">
+      <input type="text" id="user-input" placeholder="Type a message..." />
+      <input type="file" id="image-upload" accept="image/*" />
+      <button id="send-btn">➡️</button>
+    </div>
+  </div>
+
+  <footer>
+  <div class="footer-container">
+    <div class="footer-column">
+      <h4>Hridya Aarogya</h4>
+      <p>Your companion in early heart disease detection and awareness.</p>
+    </div>
+
+    <div class="footer-column">
+      <h4>Quick Links</h4>
+  <nav>
+  <ul>
+    <li><a href="/">Home</a></li>
+    <li><a href="/calculator">Detector</a></li>
+    <li><a href="/aboutus">About Us</a></li>
+    <li><a href="/contact">Contact Us</a></li>
+  </ul>
+</nav>
+
+    </div>
+
+    <div class="footer-column">
+      <h4>Contact</h4>
+      <p>Email: <a href="mailto:hridya.support@gmail.com">hridya.support@gmail.com</a></p>
+      <p>Phone: +91-*******</p>
+    </div>
+  </div>
+
+  <div class="footer-bottom">
+    <p>&copy; 2025 Hridya Aarogya. All rights reserved.</p>
+  </div>
+</footer>
+
+
+  <script>
+    function toggleMenu() {
+      const navMenu = document.getElementById('nav-menu');
+      navMenu.classList.toggle('show');
+    }
+
+    window.addEventListener("load", () => {
+      setTimeout(() => {
+        const loader = document.getElementById("loader");
+        if (loader) loader.style.display = "none";
+        const content = document.getElementById("content");
+        if (content) content.style.display = "block";
+      }, 3000);
+
+     const slider = document.getElementById("articleSlider");
+const arrowLeft = document.getElementById("arrowLeft");
+const arrowRight = document.getElementById("arrowRight");
+
+let sliderInterval;
+
+// Make the slider loop smoothly by cloning cards at both ends
+function cloneCardsForLoop() {
+  if (!slider) return;
+  const cards = slider.querySelectorAll(".article-card");
+  if (cards.length > 0) {
+    const firstClone = cards[0].cloneNode(true);
+    const lastClone = cards[cards.length - 1].cloneNode(true);
+    slider.appendChild(firstClone);
+    slider.insertBefore(lastClone, slider.firstChild);
+    slider.scrollLeft = cards[0].offsetWidth + 20; // initial offset
+  }
+}
+
+// Scroll slider function
+function scrollSlider(direction) {
+  if (!slider) return;
+  const firstCard = slider.querySelector(".article-card");
+  if (!firstCard) return;
+  const cardWidth = firstCard.offsetWidth + 20;
+
+  if (direction === "right") {
+    slider.scrollBy({ left: cardWidth, behavior: "smooth" });
+  } else {
+    slider.scrollBy({ left: -cardWidth, behavior: "smooth" });
+  }
+}
+
+// Infinite scroll effect
+slider.addEventListener("scroll", () => {
+  const cards = slider.querySelectorAll(".article-card");
+  if (!cards.length) return;
+  const cardWidth = cards[0].offsetWidth + 20;
+
+  // Loop to start
+  if (slider.scrollLeft <= 0) {
+    slider.scrollLeft = (cards.length - 2) * cardWidth;
+  }
+  // Loop to end
+  if (slider.scrollLeft >= (cards.length - 1) * cardWidth) {
+    slider.scrollLeft = cardWidth;
+  }
+});
+
+// Auto-scroll
+function startAutoScroll() {
+  sliderInterval = setInterval(() => scrollSlider("right"), 4000);
+}
+function stopAutoScroll() {
+  clearInterval(sliderInterval);
+}
+
+if (slider) {
+  cloneCardsForLoop();
+  slider.addEventListener("mouseenter", stopAutoScroll);
+  slider.addEventListener("mouseleave", startAutoScroll);
+  startAutoScroll();
+}
+
+// Arrow buttons
+if (arrowLeft && arrowRight) {
+  arrowLeft.addEventListener("click", () => {
+    stopAutoScroll();
+    scrollSlider("left");
+  });
+  arrowRight.addEventListener("click", () => {
+    stopAutoScroll();
+    scrollSlider("right");
+  });
+}
+
+// Swipe support for mobile
+let startX = 0;
+slider.addEventListener("touchstart", (e) => {
+  startX = e.touches[0].clientX;
+}, { passive: true });
+
+slider.addEventListener("touchend", (e) => {
+  const endX = e.changedTouches[0].clientX;
+  if (endX < startX - 50) scrollSlider("right");
+  else if (endX > startX + 50) scrollSlider("left");
+});
+
+
+      const articlesLink = document.querySelector('a[href="#articles"]');
+      const articlesSection = document.getElementById('articles');
+
+      if (articlesLink && articlesSection) {
+        articlesLink.addEventListener('click', function (e) {
+          e.preventDefault();
+          smoothScroll(articlesSection, 600);
+        });
+      }
+
+      function smoothScroll(target, duration = 600) {
+        const start = window.scrollY;
+        const end = target.getBoundingClientRect().top + start - 70;
+        const distance = end - start;
+        let startTime = null;
+
+        function easeInOutQuad(t) {
+          return t < 0.5 ? 2 * t * t : -1 + (4 - 2 * t) * t;
+        }
+
+        function animation(currentTime) {
+          if (startTime === null) startTime = currentTime;
+          const timeElapsed = currentTime - startTime;
+          const progress = Math.min(timeElapsed / duration, 1);
+          const easedProgress = easeInOutQuad(progress);
+          window.scrollTo(0, start + distance * easedProgress);
+          if (timeElapsed < duration) requestAnimationFrame(animation);
+        }
+
+        requestAnimationFrame(animation);
+      }
+
+      startAutoScroll();
+    });
+  </script>
+
+  <script type="module">
+    import { initializeApp } from "https://www.gstatic.com/firebasejs/10.12.0/firebase-app.js";
+    import { 
+      getAuth, 
+      createUserWithEmailAndPassword, 
+      signInWithEmailAndPassword,
+      onAuthStateChanged,
+      signOut 
+    } from "https://www.gstatic.com/firebasejs/10.12.0/firebase-auth.js";
+    import { getFirestore, collection, addDoc, serverTimestamp } from "https://www.gstatic.com/firebasejs/10.12.0/firebase-firestore.js";
+
+    const firebaseConfig = {
+      apiKey: "AIzaSyB2Y03pC09bxB8w6TzSxR45bkA4k_SgYxs",
+      authDomain: "hridya-hackathon-51785.firebaseapp.com",
+      projectId: "hridya-hackathon-51785",
+      storageBucket: "hridya-hackathon-51785.appspot.com",
+      messagingSenderId: "38950160855",
+      appId: "1:38950160855:web:7756799d68c61cef0e6392"
+    };
+
+    const app = initializeApp(firebaseConfig);
+    const auth = getAuth(app);
+    const db = getFirestore(app);
+
+    async function logUserLogin(user) {
+      try {
+        await addDoc(collection(db, "login_activity"), {
+          email: user.email,
+          uid: user.uid,
+          loginTime: serverTimestamp()
+        });
+        console.log("Login recorded for:", user.email);
+      } catch (error) {
+        console.error("Error recording login:", error);
+      }
+    }
+
+    document.querySelector("#registerModal .auth-btn").addEventListener("click", async () => {
+      const name = document.querySelector("#registerModal input[type='text']").value;
+      const email = document.querySelector("#registerModal input[type='email']").value;
+      const password = document.querySelector("#registerModal input[type='password']").value;
+
+      try {
+        const userCredential = await createUserWithEmailAndPassword(auth, email, password);
+        alert("Registered successfully!");
+        closeRegisterModal();
+        openLoginModal();
+      } catch (error) {
+        alert(error.message);
+      }
+    });
+
+    document.querySelector("#loginModal .auth-btn").addEventListener("click", async () => {
+      const email = document.querySelector("#loginModal input[type='email']").value;
+      const password = document.querySelector("#loginModal input[type='password']").value;
+
+      try {
+        const userCredential = await signInWithEmailAndPassword(auth, email, password);
+        alert("Login successful!");
+        closeLoginModal();
+        document.querySelector(".login-btn").innerText = "Logout";
+      } catch (error) {
+        alert(error.message);
+      }
+    });
+
+    document.querySelector(".login-btn").addEventListener("click", async () => {
+      if (auth.currentUser) {
+        await signOut(auth);
+        alert("Logged out");
+        document.querySelector(".login-btn").innerText = "Login";
+      } else {
+        openLoginModal();
+      }
+    });
+
+    onAuthStateChanged(auth, (user) => {
+      if (user) {
+        localStorage.setItem("loggedInUser", user.email);
+        logUserLogin(user);
+      }
+    });
+  </script>
+
+  <script>
+    function openLoginModal() {
+      document.getElementById('loginModal').classList.remove('hidden');
+    }
+
+    function closeLoginModal() {
+      document.getElementById('loginModal').classList.add('hidden');
+    }
+
+    function openRegisterModal() {
+      document.getElementById('registerModal').classList.remove('hidden');
+    }
+
+    function closeRegisterModal() {
+      document.getElementById('registerModal').classList.add('hidden');
+    }
+
+    function switchToRegister() {
+      closeLoginModal();
+      openRegisterModal();
+    }
+
+    function switchToLogin() {
+      closeRegisterModal();
+      openLoginModal();
+    }
+
+    const chatbotBtn = document.getElementById("chatbotBtn");
+    const chatbotPopup = document.getElementById("chatbotPopup");
+    const chatbotClose = document.getElementById("chatbotClose");
+    const chatSend = document.getElementById("send-btn");
+    const chatInput = document.getElementById("user-input");
+    const chatBox = document.getElementById("chatbox");
+    const imageUpload = document.getElementById("image-upload");
+
+    chatbotBtn.addEventListener("click", () => {
+      chatbotPopup.style.display = "flex";
+      chatInput.focus();
+    });
+
+    chatbotClose.addEventListener("click", () => {
+      chatbotPopup.style.display = "none";
+    });
+
+    chatSend.addEventListener("click", sendMessage);
+    chatInput.addEventListener("keypress", function (e) {
+      if (e.key === "Enter") sendMessage();
+    });
+
+    async function sendMessage() {
+      const message = chatInput.value.trim();
+      const imageFile = imageUpload.files[0];
+
+      if (!message && !imageFile) return;
+
+      appendMessage("You", message || "Image uploaded", "user");
+      chatInput.value = "";
+      imageUpload.value = "";
+
+      const formData = new FormData();
+      if (message) formData.append("message", message);
+      if (imageFile) formData.append("image", imageFile);
+
+      try {
+        const response = await fetch("http://127.0.0.1:5000/chat", {
+          method: "POST",
+          body: formData,
+        });
+
+        if (!response.ok) throw new Error(`HTTP error! status: ${response.status}`);
+
+        const data = await response.json();
+        console.log("Response:", data);
+
+        if (data.reply) {
+          appendMessage("Bot", data.reply, "bot");
+        } else if (data.error) {
+          appendMessage("Error", data.error, "bot");
+        } else {
+          appendMessage("Error", "No reply from server.", "bot");
+        }
+      } catch (error) {
+        appendMessage("Error", error.message, "bot");
+        console.error("Fetch error:", error);
+      }
+    }
+
+    function appendMessage(sender, text, className) {
+      const messageDiv = document.createElement("div");
+      messageDiv.className = `message ${className}`;
+      messageDiv.innerHTML = `<span class="sender">${sender}:</span> ${text}`;
+      chatBox.appendChild(messageDiv);
+      chatBox.scrollTop = chatBox.scrollHeight;
+    }
+  </script>
+</body>
+</html>
